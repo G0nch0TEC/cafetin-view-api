@@ -1,13 +1,14 @@
-# 🍽️ SelvaPos
+# 🍽️ SelvaPOS
 
-> SelvaPOS es una solución moderna para restaurantes que optimiza la atención, agiliza los pedidos y simplifica la gestión de ventas,     todo desde una sola plataforma intuitiva.
+> **SelvaPOS** es una solución moderna para restaurantes que optimiza la atención, agiliza los pedidos y simplifica la gestión de ventas, todo desde una sola plataforma intuitiva.
+
 ---
 
 ## 1. Descripción del Negocio
 
-Un restaurante es un establecimiento comercial donde se preparan y sirven alimentos y bebidas a los clientes. Su operación diaria involucra la atención de mesas, toma de pedidos, preparación en cocina, cobro y cierre de caja.
+**Fogón Amazónico** es un restaurante ubicado en Pucallpa, Perú, que ofrece platos típicos de la gastronomía amazónica en un ambiente acogedor. Su operación diaria involucra la atención de mesas, toma de pedidos, preparación en cocina, cobro y cierre de caja.
 
-Actualmente, muchos restaurantes medianos gestionan estos procesos de forma manual o con herramientas no integradas, lo que genera errores en pedidos, demoras en la atención y dificultad para llevar un control real de las ventas.
+Actualmente, el restaurante gestiona estos procesos de forma manual o con herramientas no integradas, lo que genera errores en pedidos, demoras en la atención y dificultad para llevar un control real de las ventas.
 
 ---
 
@@ -22,7 +23,7 @@ Actualmente, muchos restaurantes medianos gestionan estos procesos de forma manu
 
 ### Solución Propuesta
 
-Desarrollar un **sistema de gestión integral para restaurante** que digitalice el flujo completo: desde la llegada del cliente hasta el cierre de caja, integrando los módulos de mesas, pedidos, menú, caja y reportes en una sola plataforma.
+Desarrollar un **sistema de gestión integral para restaurante** que digitalice el flujo completo: desde la llegada del cliente hasta el cierre de caja, integrando los módulos de mesas, pedidos, menú, caja y reportes en una sola plataforma web.
 
 ---
 
@@ -50,7 +51,7 @@ Desarrollar un **sistema de gestión integral para restaurante** que digitalice 
 **Incluye:**
 - Gestión de mesas y reservas
 - Registro de pedidos por mesa
-- Administración del menú/carta
+- Administración del menú / carta
 - Módulo de caja y pagos
 - Reportes de ventas diarias
 
@@ -104,37 +105,54 @@ Cliente llega
 ```
 
 Los actores del sistema son:
-- **Administrador:** gestiona el menú, usuarios y reportes.
-- **Mozo:** registra pedidos y gestiona mesas.
-- **Cajero:** genera cuentas y registra pagos.
-- **Cocina:** visualiza los pedidos pendientes.
+
+| Actor | Rol en el sistema |
+|---|---|
+| **Administrador** | Gestiona el menú, usuarios y reportes. |
+| **Mozo** | Registra pedidos y gestiona mesas. |
+| **Cajero** | Genera cuentas y registra pagos. |
+| **Cocina** | Visualiza los pedidos pendientes. |
 
 ---
 
 ## 5. Imágenes del Problema
 
-> *(Próximamente — fotos reales del negocio mostrando el problema actual)*
+> *(Fotos reales del negocio mostrando el problema actual — sin IA)*
 
 ---
 
 ## 6. Imágenes del Negocio
 
-> *(Próximamente — fotos reales del restaurante o contexto del negocio)*
+> *(Fotos reales del restaurante Fogón Amazónico — sin IA)*
 
 ---
 
-## Tecnologías (Por definir)
+## Tecnologías
 
-- Frontend: por definir
-- Backend: por definir
-- Base de datos: por definir
+> *(Por definir en las próximas semanas)*
+
+| Capa | Tecnología |
+|---|---|
+| Frontend | Por definir |
+| Backend | Por definir |
+| Base de datos | Por definir |
 
 ---
 
 ## Estado del Proyecto
 
-🟡 En desarrollo — Semana 1 de 8
+🟡 **En desarrollo** — Semana 1 de 8
+
+| Fase | Estado |
+|---|---|
+| Preanálisis | ✅ Completado |
+| Análisis | ✅ Completado |
+| Diseño | 🔲 Pendiente |
+| Desarrollo | 🔲 Pendiente |
+| Pruebas | 🔲 Pendiente |
+| Implantación | 🔲 Pendiente |
+| Mantenimiento | 🔲 Pendiente |
 
 ---
 
-*Proyecto académico — 2026*
+*Proyecto académico — 2026 | Negocio: Fogón Amazónico, Pucallpa, Perú*
