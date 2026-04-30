@@ -1,7 +1,6 @@
-# 🍽️ Sistema de Gestión para Restaurante
+# 🍽️ SelvaPos
 
-> Proyecto de software desarrollado como parte del curso — 2026
-
+> SelvaPOS es una solución moderna para restaurantes que optimiza la atención, agiliza los pedidos y simplifica la gestión de ventas,     todo desde una sola plataforma intuitiva.
 ---
 
 ## 1. Descripción del Negocio
