@@ -1,14 +1,14 @@
-# 🍽️ SelvaPOS
+# ☕ Cafetín — API Web
 
-> **SelvaPOS** es una solución moderna para restaurantes que optimiza la atención, agiliza los pedidos y simplifica la gestión de ventas, todo desde una sola plataforma intuitiva.
+> **Cafetín API** es una interfaz web en PHP que permite consultar los datos registrados por la app Android de Cafetín: clientes, fiados, pagos e historial — sin necesidad de tener el dispositivo a mano.
 
 ---
 
 ## 1. Descripción del Negocio
 
-**Fogón Amazónico** es un restaurante ubicado en Pucallpa, Perú, que ofrece platos típicos de la gastronomía amazónica en un ambiente acogedor. Su operación diaria involucra la atención de mesas, toma de pedidos, preparación en cocina, cobro y cierre de caja.
+**Cafetín escolar** es un negocio de pequeña escala que gestiona fiados entre alumnos y la persona encargada de la tienda. El registro de deudas, pagos y movimientos se realiza desde la app Android **Cafetín**, que opera 100% offline en el dispositivo.
 
-Actualmente, el restaurante gestiona estos procesos de forma manual o con herramientas no integradas, lo que genera errores en pedidos, demoras en la atención y dificultad para llevar un control real de las ventas.
+Esta API complementa la app ofreciendo una vista de solo lectura accesible desde cualquier navegador, útil para revisar el estado de los fiados sin depender del teléfono.
 
 ---
 
@@ -16,14 +16,15 @@ Actualmente, el restaurante gestiona estos procesos de forma manual o con herram
 
 ### Problema
 
-- Los mozos anotan los pedidos en papel, lo que genera errores y confusiones en cocina.
-- No existe un control claro de qué mesas están ocupadas o libres.
-- El cierre de caja se hace manualmente, sin reportes confiables.
-- No se lleva un registro de los platos más vendidos ni de los ingresos diarios.
+- Los datos de la app solo son visibles desde el dispositivo Android donde está instalada.
+- No existe forma de consultar el estado de los fiados desde una computadora u otro dispositivo.
+- Revisar el historial o los saldos fuera del teléfono requiere acceso físico al mismo.
 
 ### Solución Propuesta
 
-Desarrollar un **sistema de gestión integral para restaurante** que digitalice el flujo completo: desde la llegada del cliente hasta el cierre de caja, integrando los módulos de mesas, pedidos, menú, caja y reportes en una sola plataforma web.
+Desarrollar una **API web en PHP** que lea la base de datos exportada por la app y exponga los datos en endpoints de consulta, permitiendo al encargado revisar clientes, fiados e historial desde cualquier navegador — sin modificar ni registrar nada desde la web.
+
+> **Regla de oro:** Los datos solo se registran desde la app Android. La API es de solo lectura.
 
 ---
 
@@ -31,34 +32,32 @@ Desarrollar un **sistema de gestión integral para restaurante** que digitalice 
 
 ### Necesidades
 
-- Registrar y visualizar el estado de las mesas (libre, ocupada, reservada).
-- Gestionar pedidos por mesa de forma rápida y clara.
-- Administrar la carta del restaurante (platos, precios, categorías).
-- Generar la cuenta por mesa y registrar el pago.
-- Obtener reportes de ventas al cierre del día.
+- Consultar la lista de clientes y su saldo actual de fiado.
+- Ver el detalle de movimientos (fiados y pagos) por cliente.
+- Revisar el historial de movimientos por fecha.
+- Consultar el catálogo de productos y categorías disponibles.
 
 ### Estudio de Viabilidad
 
 | Aspecto | Evaluación |
 |---|---|
-| Técnica | Viable. Se utilizarán tecnologías web estándar accesibles. |
-| Operativa | Viable. El flujo del sistema sigue el proceso real del negocio. |
-| Económica | Viable. Es un proyecto académico sin costo de infraestructura inicial. |
-| Tiempo | Viable. El alcance está ajustado a 8 semanas de desarrollo. |
+| Técnica | Viable. PHP con acceso a SQLite no requiere infraestructura compleja. |
+| Operativa | Viable. La API sigue la estructura de datos ya definida por la app. |
+| Económica | Viable. Sin costo adicional; reutiliza la base de datos existente de la app. |
+| Tiempo | Viable. El alcance está ajustado a las entidades ya modeladas en la app. |
 
 ### Alcance del Sistema
 
 **Incluye:**
-- Gestión de mesas y reservas
-- Registro de pedidos por mesa
-- Administración del menú / carta
-- Módulo de caja y pagos
-- Reportes de ventas diarias
+- Consulta de clientes y sus saldos
+- Consulta de movimientos por cliente
+- Consulta del historial por fecha
+- Consulta del catálogo (categorías y productos)
 
-**No incluye (por ahora):**
-- App móvil para clientes
-- Integración con sistemas de delivery
-- Control de inventario de ingredientes
+**No incluye:**
+- Registro, edición ni eliminación de datos (eso lo hace la app)
+- Autenticación de usuarios por ahora
+- App móvil propia
 
 ---
 
@@ -70,78 +69,62 @@ Desarrollar un **sistema de gestión integral para restaurante** que digitalice 
 
 | ID | Descripción |
 |---|---|
-| RF01 | El sistema debe mostrar el estado de cada mesa (libre / ocupada / reservada). |
-| RF02 | El mozo debe poder registrar un pedido asociado a una mesa. |
-| RF03 | El sistema debe enviar los pedidos al área de cocina. |
-| RF04 | El administrador debe poder agregar, editar y eliminar platos del menú. |
-| RF05 | El sistema debe generar la cuenta detallada de una mesa. |
-| RF06 | El cajero debe poder registrar el pago (efectivo / tarjeta). |
-| RF07 | El sistema debe generar un reporte de ventas del día. |
-| RF08 | El sistema debe permitir registrar reservas con nombre y hora. |
+| RF01 | La API debe retornar la lista de clientes con su saldo de fiado actual. |
+| RF02 | La API debe retornar los movimientos (fiados y pagos) de un cliente dado su ID. |
+| RF03 | La API debe retornar todos los movimientos de un día específico. |
+| RF04 | La API debe retornar las categorías del catálogo con sus productos. |
+| RF05 | Todos los endpoints son de solo lectura (GET). No se exponen endpoints de escritura. |
 
 #### Requisitos No Funcionales
 
 | ID | Descripción |
 |---|---|
-| RNF01 | La interfaz debe ser intuitiva y de fácil uso para el personal. |
-| RNF02 | El sistema debe responder en menos de 2 segundos por acción. |
-| RNF03 | Los datos deben persistir correctamente en base de datos. |
-| RNF04 | El sistema debe funcionar en navegadores modernos. |
-| RNF05 | El acceso debe estar protegido con usuario y contraseña. |
+| RNF01 | Las respuestas deben estar en formato JSON. |
+| RNF02 | La API debe responder en menos de 2 segundos por consulta. |
+| RNF03 | La API debe leer la base de datos SQLite generada por la app Android. |
+| RNF04 | Debe funcionar en cualquier servidor con PHP y soporte para SQLite. |
 
 ### Análisis de Requisitos
 
-El flujo principal del sistema es el siguiente:
+El flujo de uso de la API es el siguiente:
 
 ```
-Cliente llega
-    → Se asigna / reserva una mesa
-    → Mozo registra el pedido
-    → Pedido llega a cocina
-    → Platos preparados y servidos
-    → Se genera la cuenta de la mesa
-    → Cajero registra el pago
-    → Se actualiza el reporte del día
+Encargado abre el navegador
+    → Consulta la lista de clientes y saldos
+    → Selecciona un cliente para ver sus movimientos
+    → O bien, consulta el historial por fecha
+    → O bien, revisa el catálogo de productos
+    ← API devuelve los datos en JSON
 ```
 
 Los actores del sistema son:
 
 | Actor | Rol en el sistema |
 |---|---|
-| **Administrador** | Gestiona el menú, usuarios y reportes. |
-| **Mozo** | Registra pedidos y gestiona mesas. |
-| **Cajero** | Genera cuentas y registra pagos. |
-| **Cocina** | Visualiza los pedidos pendientes. |
+| **Encargado** | Consulta datos de clientes, fiados e historial desde la web. |
+| **App Android** | Única fuente de escritura; registra todos los datos en la base SQLite. |
 
 ---
 
-## 5. Imágenes del Problema
+## 5. Imágenes del Negocio
 
-> *(Esperen... ¿era de un negocio real?)*
-
----
-
-## 6. Imágenes del Negocio
-
-> *(Esperen... ¿era de un negocio real?)*
+> *(Por agregar)*
 
 ---
 
 ## Tecnologías
 
-> *(Por definir)*
-
 | Capa | Tecnología |
 |---|---|
-| Frontend | Por definir |
-| Backend | Por definir |
-| Base de datos | Por definir |
+| Backend / API | PHP |
+| Base de datos | SQLite (generada por la app Android) |
+| Formato de respuesta | JSON |
 
 ---
 
 ## Estado del Proyecto
 
-🟡 **En desarrollo** — Semana 1 de 8
+🟡 **En desarrollo** — Semana 1
 
 | Fase | Estado |
 |---|---|
@@ -155,4 +138,4 @@ Los actores del sistema son:
 
 ---
 
-*Proyecto académico — 2026 | Negocio: Fogón Amazónico, Pucallpa, Perú*
+*Proyecto complementario a [Cafetín App Android](README__app_.md) — 2026*
