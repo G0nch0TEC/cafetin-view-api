@@ -117,19 +117,19 @@ Los actores del sistema son:
 
 ## 5. Imágenes del Problema
 
-> *(Fotos reales del negocio mostrando el problema actual — sin IA)*
+> *(Esperen... ¿era de un negocio real?)*
 
 ---
 
 ## 6. Imágenes del Negocio
 
-> *(Fotos reales del restaurante Fogón Amazónico — sin IA)*
+> *(Esperen... ¿era de un negocio real?)*
 
 ---
 
 ## Tecnologías
 
-> *(Por definir en las próximas semanas)*
+> *(Por definir)*
 
 | Capa | Tecnología |
 |---|---|
