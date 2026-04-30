@@ -6,9 +6,9 @@
 
 ## 1. Descripción del Negocio
 
-** El Bijao ** es un restaurante reconocido en la ciudad de Pucallpa, Perú, especializado en gastronomía amazónica. Ofrece platos típicos como juane, tacacho con cecina y patarashca, en un ambiente que combina tradición y comodidad para locales y turistas.
+**Fogón Amazónico** es un restaurante ubicado en Pucallpa, Perú, que ofrece platos típicos de la gastronomía amazónica en un ambiente acogedor. Su operación diaria involucra la atención de mesas, toma de pedidos, preparación en cocina, cobro y cierre de caja.
 
-Su operación diaria incluye la gestión de mesas, toma de pedidos, coordinación con cocina, atención al cliente y procesamiento de pagos. Como muchos restaurantes tradicionales, estos procesos pueden realizarse de forma manual o con herramientas no integradas, lo que puede generar demoras, errores en pedidos y limitaciones en el control de ventas.
+Actualmente, el restaurante gestiona estos procesos de forma manual o con herramientas no integradas, lo que genera errores en pedidos, demoras en la atención y dificultad para llevar un control real de las ventas.
 
 ---
 
