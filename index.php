@@ -24,4 +24,18 @@ if ($method === 'GET' && $uri === '/personas') {
     exit;
 }
 
+// GET /movimientos  (también acepta /movimientos?personaId=5)
+if ($method === 'GET' && $uri === '/movimientos') {
+    require_once __DIR__ . '/controller/MovimientosController.php';
+    MovimientosController::listar(getDB());
+    exit;
+}
+
+// GET /catalogo
+if ($method === 'GET' && $uri === '/catalogo') {
+    require_once __DIR__ . '/controller/CatalogoController.php';
+    CatalogoController::listar(getDB());
+    exit;
+}s
+
 json_response(['error' => 'Endpoint no encontrado'], 404);
