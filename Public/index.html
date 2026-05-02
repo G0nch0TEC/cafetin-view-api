@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <title>DashBoard</title>
+</head>
+<body>
+    <!-- SideBar-->
+    <div id="sidebar-container"></div>
+
+
+
+
+
+
+
+
+
+<script>
+    fetch("components/sidebar.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("sidebar-container").innerHTML = data
+        })
+</script>
+</body>
+</html>
