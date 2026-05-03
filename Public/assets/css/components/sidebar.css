@@ -136,3 +136,7 @@ body {
     width: 22px;
     text-align: center;
 }
+
+i[data-lucide] {
+    font-style: normal;
+}

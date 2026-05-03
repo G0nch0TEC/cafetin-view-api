@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/pages/catalogo.css">
+    <link rel="stylesheet" href="../assets/css/components/sidebar.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>DashBoard-Catalogo</title>
+</head>
+<body>
+    <!-- SideBar-->
+    <div id="sidebar-container"></div>
+     <main class="page-content">
+ 
+        <div class="page-header">
+            <h1 class="page-title">Catálogo</h1>
+            <p class="page-subtitle">Consulta los productos por categoría</p>
+        </div>
+ 
+        <div class="catalogo-wrapper">
+ 
+            <div class="search-box">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="buscador" placeholder="Buscar producto..." />
+            </div>
+ 
+            <div class="tabs-container" id="tabs-container"></div>
+ 
+            <div class="productos-grid" id="productos-grid"></div>
+ 
+        </div>
+ 
+    </main>
+<script src="../assets/js/init.js"></script>
+<script src="../assets/js/pages/catalogo.js"></script>
+</body>
+</html>
