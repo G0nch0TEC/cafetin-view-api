@@ -1,18 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/components/sidebar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <title>DashBoard</title>
+    <title>DashBoard — Inicio</title>
 </head>
 <body>
-    <!-- SideBar-->
     <div id="sidebar-container"></div>
 
+    <main class="page-content">
 
-<script src="assets/js/init.js"></script>
+        <!-- Saludo -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Buenos días ☀️</h1>
+                <p class="page-subtitle">Sábado, 3 de mayo 2026 — resumen del cafetín</p>
+            </div>
+        </div>
+
+        <!-- Métricas principales -->
+        <div class="metricas-grid">
+
+            <div class="metrica-card deuda">
+                <div class="metrica-icon"><i data-lucide="trending-up"></i></div>
+                <div class="metrica-body">
+                    <span class="metrica-label">Deuda total</span>
+                    <span class="metrica-valor">S/ 48.50</span>
+                    <span class="metrica-sub">4 personas con saldo pendiente</span>
+                </div>
+            </div>
+
+            <div class="metrica-card pago">
+                <div class="metrica-icon"><i data-lucide="wallet"></i></div>
+                <div class="metrica-body">
+                    <span class="metrica-label">Cobrado hoy</span>
+                    <span class="metrica-valor">S/ 9.50</span>
+                    <span class="metrica-sub">1 pago recibido</span>
+                </div>
+            </div>
+
+            <div class="metrica-card fiado">
+                <div class="metrica-icon"><i data-lucide="receipt"></i></div>
+                <div class="metrica-body">
+                    <span class="metrica-label">Fiado hoy</span>
+                    <span class="metrica-valor">S/ 13.00</span>
+                    <span class="metrica-sub">4 fiados registrados</span>
+                </div>
+            </div>
+
+            <div class="metrica-card neutro">
+                <div class="metrica-icon"><i data-lucide="users"></i></div>
+                <div class="metrica-body">
+                    <span class="metrica-label">Personas</span>
+                    <span class="metrica-valor">8</span>
+                    <span class="metrica-sub">3 al día · 4 con deuda · 1 sin mov.</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Fila inferior: últimos movimientos + accesos rápidos -->
+        <div class="bottom-grid">
+
+            <!-- Últimos movimientos del día -->
+            <div class="panel movimientos-recientes">
+                <div class="panel-header">
+                    <h2 class="panel-titulo">Movimientos de hoy</h2>
+                    <a href="pages/historial.html" class="panel-link">
+                        Ver historial <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+                <div class="mov-lista">
+
+                    <div class="mov-item">
+                        <span class="mini-avatar">JR</span>
+                        <div class="mov-datos">
+                            <span class="mov-nombre">Juan Ríos</span>
+                            <span class="mov-nota">Almuerzo + gaseosa</span>
+                        </div>
+                        <div class="mov-right">
+                            <span class="mov-monto fiado">+ S/ 3.50</span>
+                            <span class="mov-hora">12:14</span>
+                        </div>
+                    </div>
+
+                    <div class="mov-item">
+                        <span class="mini-avatar">LP</span>
+                        <div class="mov-datos">
+                            <span class="mov-nombre">Luis Paredes</span>
+                            <span class="mov-nota">Café + agua</span>
+                        </div>
+                        <div class="mov-right">
+                            <span class="mov-monto fiado">+ S/ 2.00</span>
+                            <span class="mov-hora">11:45</span>
+                        </div>
+                    </div>
+
+                    <div class="mov-item">
+                        <span class="mini-avatar">MC</span>
+                        <div class="mov-datos">
+                            <span class="mov-nombre">María Castro</span>
+                            <span class="mov-nota">Abono semanal</span>
+                        </div>
+                        <div class="mov-right">
+                            <span class="mov-monto pago">- S/ 9.50</span>
+                            <span class="mov-hora">11:20</span>
+                        </div>
+                    </div>
+
+                    <div class="mov-item">
+                        <span class="mini-avatar">RG</span>
+                        <div class="mov-datos">
+                            <span class="mov-nombre">Rosa García</span>
+                            <span class="mov-nota">Menú del día</span>
+                        </div>
+                        <div class="mov-right">
+                            <span class="mov-monto fiado">+ S/ 4.50</span>
+                            <span class="mov-hora">10:55</span>
+                        </div>
+                    </div>
+
+                    <div class="mov-item">
+                        <span class="mini-avatar">AT</span>
+                        <div class="mov-datos">
+                            <span class="mov-nombre">Andrés Torres</span>
+                            <span class="mov-nota">Snacks</span>
+                        </div>
+                        <div class="mov-right">
+                            <span class="mov-monto fiado">+ S/ 3.00</span>
+                            <span class="mov-hora">10:30</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Panel derecho: mayores deudas + accesos -->
+            <div class="right-col">
+
+                <!-- Top deudores -->
+                <div class="panel deudores">
+                    <div class="panel-header">
+                        <h2 class="panel-titulo">Mayores deudas</h2>
+                        <a href="pages/personas.html" class="panel-link">
+                            Ver todos <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="deudores-lista">
+
+                        <a href="pages/detalle.html?id=8" class="deudor-row">
+                            <span class="mini-avatar">RG</span>
+                            <span class="deudor-nombre">Rosa García</span>
+                            <span class="deudor-monto">S/ 22.00</span>
+                        </a>
+                        <a href="pages/detalle.html?id=3" class="deudor-row">
+                            <span class="mini-avatar">LP</span>
+                            <span class="deudor-nombre">Luis Paredes</span>
+                            <span class="deudor-monto">S/ 15.00</span>
+                        </a>
+                        <a href="pages/detalle.html?id=1" class="deudor-row">
+                            <span class="mini-avatar">JR</span>
+                            <span class="deudor-nombre">Juan Ríos</span>
+                            <span class="deudor-monto">S/ 8.50</span>
+                        </a>
+                        <a href="pages/detalle.html?id=5" class="deudor-row">
+                            <span class="mini-avatar">AT</span>
+                            <span class="deudor-nombre">Andrés Torres</span>
+                            <span class="deudor-monto">S/ 3.00</span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Accesos rápidos -->
+                <div class="accesos-grid">
+                    <a href="pages/personas.html" class="acceso-card">
+                        <i data-lucide="users"></i>
+                        <span>Clientes</span>
+                    </a>
+                    <a href="pages/historial.html" class="acceso-card">
+                        <i data-lucide="bar-chart-2"></i>
+                        <span>Historial</span>
+                    </a>
+                    <a href="pages/catalogo.html" class="acceso-card">
+                        <i data-lucide="shopping-bag"></i>
+                        <span>Catálogo</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="assets/js/init.js"></script>
 </body>
 </html>

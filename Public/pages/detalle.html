@@ -1,18 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/pages/detalle.css">
     <link rel="stylesheet" href="../assets/css/components/sidebar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <title>DashBoard-Detalle</title>
+    <title>DashBoard — Detalle</title>
 </head>
 <body>
-    <!-- SideBar-->
     <div id="sidebar-container"></div>
 
+    <main class="page-content">
 
-<script src="../assets/js/init.js"></script>
+        <div class="page-header">
+            <a href="personas.html" class="btn-volver">
+                <i data-lucide="arrow-left"></i>
+                Volver
+            </a>
+        </div>
+
+        <!-- Cabecera de la persona -->
+        <div class="persona-header">
+            <div class="persona-avatar">JR</div>
+            <div class="persona-info">
+                <h1 class="persona-nombre">Juan Ríos</h1>
+                <p class="persona-descripcion">Estudiante de 3er año — Aula B-12</p>
+            </div>
+            <div class="saldo-badge deuda">
+                <span class="saldo-label">Saldo pendiente</span>
+                <span class="saldo-monto">S/ 8.50</span>
+            </div>
+        </div>
+
+        <!-- Resumen rápido -->
+        <div class="resumen-grid">
+            <div class="resumen-card">
+                <span class="resumen-label">Total fiado</span>
+                <span class="resumen-valor fiado">S/ 23.00</span>
+            </div>
+            <div class="resumen-card">
+                <span class="resumen-label">Total pagado</span>
+                <span class="resumen-valor pago">S/ 14.50</span>
+            </div>
+            <div class="resumen-card">
+                <span class="resumen-label">Movimientos</span>
+                <span class="resumen-valor neutro">7</span>
+            </div>
+        </div>
+
+        <!-- Tabla de movimientos -->
+        <div class="movimientos-wrapper">
+            <div class="movimientos-header">
+                <h2 class="movimientos-titulo">Movimientos</h2>
+                <span class="movimientos-count">7 registros</span>
+            </div>
+
+            <div class="tabla-scroll">
+                <table class="tabla-movimientos">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 3.50</td>
+                            <td class="fecha">03 may 2026, 12:14</td>
+                            <td class="nota">Almuerzo + gaseosa</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge pago">PAGO</span></td>
+                            <td class="monto pago">S/ 5.00</td>
+                            <td class="fecha">02 may 2026, 17:30</td>
+                            <td class="nota">—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 1.50</td>
+                            <td class="fecha">02 may 2026, 11:05</td>
+                            <td class="nota">Café</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge pago">PAGO</span></td>
+                            <td class="monto pago">S/ 9.50</td>
+                            <td class="fecha">30 abr 2026, 18:00</td>
+                            <td class="nota">Abono semanal</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 8.00</td>
+                            <td class="fecha">29 abr 2026, 12:30</td>
+                            <td class="nota">Menú x2 + jugo</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 2.00</td>
+                            <td class="fecha">28 abr 2026, 10:20</td>
+                            <td class="nota">Agua + galletas</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 8.00</td>
+                            <td class="fecha">27 abr 2026, 13:00</td>
+                            <td class="nota">Primer fiado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../assets/js/init.js"></script>
+    <script src="../assets/js/pages/detalle.js"></script>
 </body>
-</html>
+</html>s

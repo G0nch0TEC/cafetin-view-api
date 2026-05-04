@@ -1,0 +1,298 @@
+/* ══════════════════════════════════════════════════════
+   DETALLE — Pastel + Glass
+   Public/assets/css/pages/detalle.css
+══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: url('../../image/background.jpg') center center / cover no-repeat fixed !important;
+}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.page-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ══════════════════════════════
+   BOTÓN VOLVER
+══════════════════════════════ */
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7c4fa0;
+    text-decoration: none;
+    padding: 6px 14px 6px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(200, 160, 230, 0.4);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-volver:hover {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: #d8b4fe;
+}
+
+.btn-volver i {
+    width: 14px;
+    height: 14px;
+}
+
+/* ══════════════════════════════
+   CABECERA PERSONA
+══════════════════════════════ */
+.persona-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 18px;
+    padding: 1.25rem 1.5rem;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 6px 24px rgba(160,100,200,0.09);
+}
+
+.persona-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e9d5ff, #ffd6e7);
+    border: 2px solid rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #6b21a8;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.persona-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.persona-nombre {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3b1c4a;
+    margin: 0 0 3px;
+    line-height: 1.2;
+}
+
+.persona-descripcion {
+    font-size: 13px;
+    color: #9b79b4;
+    margin: 0;
+}
+
+/* Badge de saldo en cabecera */
+.saldo-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.saldo-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.saldo-monto {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.saldo-badge.deuda .saldo-label { color: #be4a4a; }
+.saldo-badge.deuda .saldo-monto { color: #c0392b; }
+.saldo-badge.al-dia .saldo-label { color: #2e7d32; }
+.saldo-badge.al-dia .saldo-monto { color: #27ae60; }
+
+/* ══════════════════════════════
+   RESUMEN RÁPIDO
+══════════════════════════════ */
+.resumen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.resumen-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.95) inset,
+        0 4px 14px rgba(160,100,200,0.07);
+}
+
+.resumen-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9b79b4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.resumen-valor {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.resumen-valor.fiado  { color: #c0392b; }
+.resumen-valor.pago   { color: #27ae60; }
+.resumen-valor.neutro { color: #3b1c4a; }
+
+/* ══════════════════════════════
+   WRAPPER MOVIMIENTOS
+══════════════════════════════ */
+.movimientos-wrapper {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 8px 28px rgba(160,100,200,0.09);
+}
+
+.movimientos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(200,160,230,0.2);
+}
+
+.movimientos-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3b1c4a;
+}
+
+.movimientos-count {
+    font-size: 12px;
+    color: #9b79b4;
+    background: rgba(168,85,247,0.08);
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+/* ══════════════════════════════
+   TABLA
+══════════════════════════════ */
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+.tabla-movimientos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tabla-movimientos thead tr {
+    background: rgba(245, 235, 255, 0.5);
+}
+
+.tabla-movimientos th {
+    padding: 10px 1.5rem;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: #9b79b4;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+}
+
+.tabla-movimientos tbody tr {
+    border-top: 1px solid rgba(200,160,230,0.15);
+    transition: background 0.15s;
+}
+
+.tabla-movimientos tbody tr:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+.tabla-movimientos td {
+    padding: 12px 1.5rem;
+    vertical-align: middle;
+    color: #3b1c4a;
+}
+
+/* badges FIADO / PAGO */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.badge.fiado {
+    background: rgba(220, 60, 60, 0.1);
+    color: #c0392b;
+    border: 1px solid rgba(220,60,60,0.2);
+}
+
+.badge.pago {
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(39,174,96,0.2);
+}
+
+/* columnas */
+.tabla-movimientos td.monto {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabla-movimientos td.monto.fiado { color: #c0392b; }
+.tabla-movimientos td.monto.pago  { color: #27ae60; }
+
+.tabla-movimientos td.fecha {
+    color: #7c5fa0;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.tabla-movimientos td.nota {
+    color: #9b79b4;
+    font-size: 13px;
+}

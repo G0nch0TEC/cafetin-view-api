@@ -1,18 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/pages/personas.css">
     <link rel="stylesheet" href="../assets/css/components/sidebar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <title>DashBoard-Clientes</title>
+    <title>DashBoard — Clientes</title>
 </head>
 <body>
-    <!-- SideBar-->
     <div id="sidebar-container"></div>
 
+    <main class="page-content">
 
-<script src="../assets/js/init.js"></script>
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Clientes</h1>
+                <p class="page-subtitle">Personas registradas en el cafetín</p>
+            </div>
+            <div class="header-meta">
+                <span class="total-badge">8 personas</span>
+            </div>
+        </div>
+
+        <!-- Buscador -->
+        <div class="search-box">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="buscador" placeholder="Buscar persona..." />
+        </div>
+
+        <!-- Lista -->
+        <div class="personas-lista" id="personas-lista">
+
+            <a href="detalle.html?id=1" class="persona-row deuda">
+                <div class="persona-avatar">JR</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Juan Ríos</span>
+                    <span class="persona-desc">Estudiante — Aula B-12</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip deuda">S/ 8.50</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=2" class="persona-row al-dia">
+                <div class="persona-avatar">MC</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">María Castro</span>
+                    <span class="persona-desc">Docente — Matemáticas</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip al-dia">Al día</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=3" class="persona-row deuda">
+                <div class="persona-avatar">LP</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Luis Paredes</span>
+                    <span class="persona-desc">Estudiante — Aula A-05</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip deuda">S/ 15.00</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=4" class="persona-row al-dia">
+                <div class="persona-avatar">SR</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Sara Ruiz</span>
+                    <span class="persona-desc">Auxiliar — Secretaría</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip al-dia">Al día</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=5" class="persona-row deuda">
+                <div class="persona-avatar">AT</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Andrés Torres</span>
+                    <span class="persona-desc">Estudiante — Aula C-08</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip deuda">S/ 3.00</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=6" class="persona-row sin-movimientos">
+                <div class="persona-avatar">PV</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Patricia Vega</span>
+                    <span class="persona-desc">Docente — Comunicación</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip sin-mov">Sin mov.</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=7" class="persona-row al-dia">
+                <div class="persona-avatar">CM</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Carlos Mendoza</span>
+                    <span class="persona-desc">Estudiante — Aula B-03</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip al-dia">Al día</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+            <a href="detalle.html?id=8" class="persona-row deuda">
+                <div class="persona-avatar">RG</div>
+                <div class="persona-datos">
+                    <span class="persona-nombre">Rosa García</span>
+                    <span class="persona-desc">Estudiante — Aula A-11</span>
+                </div>
+                <div class="persona-saldo-area">
+                    <span class="saldo-chip deuda">S/ 22.00</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="../assets/js/init.js"></script>
+    <script src="../assets/js/pages/personas.js"></script>
 </body>
 </html>
