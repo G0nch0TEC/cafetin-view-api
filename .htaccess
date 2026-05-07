@@ -1,0 +1,14 @@
+Options -Indexes
+DirectorySlash Off
+
+# Activar mod_rewrite
+RewriteEngine On
+RewriteBase /cafetin-view-api
+
+# Si el archivo físico existe, servirlo directo
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Pasar TODO a index.php conservando query string
+RewriteRule ^(.*)$ index.php [QSA,L]

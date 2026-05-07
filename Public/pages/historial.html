@@ -1,18 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/pages/historial.css">
     <link rel="stylesheet" href="../assets/css/components/sidebar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <title>Dashboard-Historial</title>
+    <title>DashBoard — Historial</title>
 </head>
 <body>
-    <!-- SideBar-->
     <div id="sidebar-container"></div>
 
+    <main class="page-content">
 
-<script src="../assets/js/init.js"></script>
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Historial</h1>
+                <p class="page-subtitle">Movimientos por día</p>
+            </div>
+            <div class="date-picker-wrap">
+                <i data-lucide="calendar" class="date-icon"></i>
+                <input type="date" id="fecha-selector" value="2026-05-03" />
+            </div>
+        </div>
+
+        <!-- Resumen del día -->
+        <div class="resumen-dia">
+            <div class="resumen-card">
+                <span class="resumen-label">Total fiado</span>
+                <span class="resumen-valor fiado">S/ 13.00</span>
+            </div>
+            <div class="resumen-card">
+                <span class="resumen-label">Total pagado</span>
+                <span class="resumen-valor pago">S/ 9.50</span>
+            </div>
+            <div class="resumen-card">
+                <span class="resumen-label">Diferencia</span>
+                <span class="resumen-valor deuda">- S/ 3.50</span>
+            </div>
+            <div class="resumen-card">
+                <span class="resumen-label">Movimientos</span>
+                <span class="resumen-valor neutro">5</span>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="movimientos-wrapper">
+            <div class="movimientos-header">
+                <h2 class="movimientos-titulo">Sábado, 3 de mayo 2026</h2>
+                <span class="movimientos-count">5 registros</span>
+            </div>
+
+            <div class="tabla-scroll">
+                <table class="tabla-movimientos">
+                    <thead>
+                        <tr>
+                            <th>Persona</th>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                            <th>Hora</th>
+                            <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="persona-cell">
+                                <span class="mini-avatar">JR</span>
+                                Juan Ríos
+                            </td>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 3.50</td>
+                            <td class="hora">12:14</td>
+                            <td class="nota">Almuerzo + gaseosa</td>
+                        </tr>
+                        <tr>
+                            <td class="persona-cell">
+                                <span class="mini-avatar">LP</span>
+                                Luis Paredes
+                            </td>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 2.00</td>
+                            <td class="hora">11:45</td>
+                            <td class="nota">Café + agua</td>
+                        </tr>
+                        <tr>
+                            <td class="persona-cell">
+                                <span class="mini-avatar">MC</span>
+                                María Castro
+                            </td>
+                            <td><span class="badge pago">PAGO</span></td>
+                            <td class="monto pago">S/ 9.50</td>
+                            <td class="hora">11:20</td>
+                            <td class="nota">Abono semanal</td>
+                        </tr>
+                        <tr>
+                            <td class="persona-cell">
+                                <span class="mini-avatar">RG</span>
+                                Rosa García
+                            </td>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 4.50</td>
+                            <td class="hora">10:55</td>
+                            <td class="nota">Menú del día</td>
+                        </tr>
+                        <tr>
+                            <td class="persona-cell">
+                                <span class="mini-avatar">AT</span>
+                                Andrés Torres
+                            </td>
+                            <td><span class="badge fiado">FIADO</span></td>
+                            <td class="monto fiado">S/ 3.00</td>
+                            <td class="hora">10:30</td>
+                            <td class="nota">Snacks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../assets/js/init.js"></script>
+    <script src="../assets/js/pages/historial.js"></script>
 </body>
 </html>

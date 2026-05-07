@@ -1,13 +1,32 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require_once __DIR__ . '/helpers/response.php';
 require_once __DIR__ . '/config/database.php';
 
-$uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri    = str_replace('/cafetin-view-api', '', $uri);
+// Leer la ruta desde el parámetro ?_route=  (estrategia sin mod_rewrite)
+// Ejemplo: /cafetin-view-api/index.php?_route=upload
+$uri = '';
+
+if (isset($_GET['_route'])) {
+    $uri = '/' . ltrim($_GET['_route'], '/');
+} else {
+    $raw = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri = preg_replace('#^/cafetin-view-api#', '', $raw);
+    $uri = rtrim($uri, '/');
+    // Si apunta a index.php directamente, limpiar
+    $uri = preg_replace('#^/index\.php#', '', $uri);
+    if ($uri === '') $uri = '/';
+}
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 // POST /upload
@@ -24,7 +43,7 @@ if ($method === 'GET' && $uri === '/personas') {
     exit;
 }
 
-// GET /movimientos  (también acepta /movimientos?personaId=5)
+// GET /movimientos
 if ($method === 'GET' && $uri === '/movimientos') {
     require_once __DIR__ . '/controller/MovimientosController.php';
     MovimientosController::listar(getDB());
@@ -36,6 +55,10 @@ if ($method === 'GET' && $uri === '/catalogo') {
     require_once __DIR__ . '/controller/CatalogoController.php';
     CatalogoController::listar(getDB());
     exit;
-}s
+}
 
-json_response(['error' => 'Endpoint no encontrado'], 404);
+json_response([
+    'error'        => 'Endpoint no encontrado',
+    'uri_recibida' => $uri,
+    'method'       => $method
+], 404);

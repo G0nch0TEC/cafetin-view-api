@@ -1,0 +1,335 @@
+/* ══════════════════════════════════════════════════════
+   INICIO / DASHBOARD — Pastel + Glass
+   Public/assets/css/main.css
+══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: url('assets/image/background.jpg') center center / cover no-repeat fixed;
+}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.page-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-height: 100vh;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b1c4a;
+    letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+    font-size: 13px;
+    color: #9b79b4;
+    margin-top: 3px;
+}
+
+/* ══════════════════════════════
+   MÉTRICAS PRINCIPALES
+══════════════════════════════ */
+.metricas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.metrica-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 1.1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.95) inset,
+        0 5px 20px rgba(160,100,200,0.08);
+}
+
+.metrica-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.metrica-icon i {
+    width: 20px;
+    height: 20px;
+}
+
+.metrica-card.deuda  .metrica-icon { background: rgba(220,60,60,0.12);   color: #c0392b; }
+.metrica-card.pago   .metrica-icon { background: rgba(39,174,96,0.12);   color: #27ae60; }
+.metrica-card.fiado  .metrica-icon { background: rgba(230,126,34,0.12);  color: #e67e22; }
+.metrica-card.neutro .metrica-icon { background: rgba(168,85,247,0.12);  color: #7c3aed; }
+
+.metrica-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.metrica-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9b79b4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metrica-valor {
+    font-size: 22px;
+    font-weight: 700;
+    color: #3b1c4a;
+    line-height: 1.1;
+}
+
+.metrica-sub {
+    font-size: 11px;
+    color: #b89fcc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ══════════════════════════════
+   LAYOUT INFERIOR
+══════════════════════════════ */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 12px;
+    flex: 1;
+}
+
+/* ══════════════════════════════
+   PANEL BASE
+══════════════════════════════ */
+.panel {
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 6px 24px rgba(160,100,200,0.08);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(200,160,230,0.2);
+}
+
+.panel-titulo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b1c4a;
+}
+
+.panel-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #a855f7;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.panel-link i { width: 13px; height: 13px; }
+.panel-link:hover { color: #7c3aed; }
+
+/* ══════════════════════════════
+   MOVIMIENTOS RECIENTES
+══════════════════════════════ */
+.mov-lista {
+    padding: 6px 0;
+}
+
+.mov-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 1.25rem;
+    border-bottom: 1px solid rgba(200,160,230,0.12);
+    transition: background 0.15s;
+}
+
+.mov-item:last-child { border-bottom: none; }
+.mov-item:hover { background: rgba(255,255,255,0.35); }
+
+.mini-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e9d5ff, #ffd6e7);
+    border: 1.5px solid rgba(255,255,255,0.85);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b21a8;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+.mov-datos {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.mov-nombre {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3b1c4a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mov-nota {
+    font-size: 11px;
+    color: #b89fcc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mov-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+.mov-monto {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.mov-monto.fiado { color: #c0392b; }
+.mov-monto.pago  { color: #27ae60; }
+
+.mov-hora {
+    font-size: 11px;
+    color: #b89fcc;
+}
+
+/* ══════════════════════════════
+   COLUMNA DERECHA
+══════════════════════════════ */
+.right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ══════════════════════════════
+   TOP DEUDORES
+══════════════════════════════ */
+.deudores-lista {
+    padding: 6px 0;
+}
+
+.deudor-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 1.25rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,160,230,0.12);
+    transition: background 0.15s;
+}
+
+.deudor-row:last-child { border-bottom: none; }
+.deudor-row:hover { background: rgba(255,255,255,0.35); }
+
+.deudor-nombre {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3b1c4a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.deudor-monto {
+    font-size: 13px;
+    font-weight: 700;
+    color: #c0392b;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   ACCESOS RÁPIDOS
+══════════════════════════════ */
+.accesos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.acceso-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1rem 0.5rem;
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+    text-decoration: none;
+    color: #5b3b6e;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background 0.18s, transform 0.15s;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.95) inset;
+}
+
+.acceso-card i {
+    width: 20px;
+    height: 20px;
+    color: #a855f7;
+}
+
+.acceso-card:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
