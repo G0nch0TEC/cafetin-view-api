@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async() =>{
         document.getElementById('buscador').addEventListener('input', (e) => {
             const filtro = e.target.value.toLowerCase();
             renderPersonas(personas.filter(p =>
-                p.nombre.toLowerCase().include(filtro) 
+                p.nombre.toLowerCase().includes(filtro) 
              ));
         });
     } catch (err) {
@@ -78,12 +78,12 @@ function actualizarBadge(total) {
 }
  
 function mostrarMensajeVacio(msg) {
-    document.getElementById('personas-lista').innerHTML =
+    document.getElementById('persona-lista').innerHTML =
         `<p class="sin-resultados">${msg}</p>`;
 }
  
 function mostrarError(msg) {
-    document.getElementById('personas-lista').innerHTML = `
+    document.getElementById('persona-lista').innerHTML = `
         <div class="error-estado">
             <p class="error-titulo">No se pudieron cargar las personas</p>
             <p class="error-detalle">${msg}</p>
