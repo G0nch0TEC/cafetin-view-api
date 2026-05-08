@@ -65,58 +65,51 @@
         <!-- Fila inferior: últimos movimientos + accesos rápidos -->
         <div class="bottom-grid">
 
-            <!-- Últimos movimientos del día -->
-            <div class="panel movimientos-recientes">
-                <div class="panel-header">
-                    <h2 class="panel-titulo">Movimientos de hoy</h2>
-                    <a href="pages/historial.html" class="panel-link">
-                        Ver historial <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-            
-            <!-- Movimientos del dia -->
-            <div class="mov-lista" id="mov-lista"></div>
+        <!-- IZQUIERDA -->
+        <div class="panel movimientos-recientes">
+            <div class="panel-header">
+                <h2 class="panel-titulo">Movimientos de hoy</h2>
+                <a href="pages/historial.html" class="panel-link">
+                Ver historial <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        <div class="mov-lista" id="mov-lista"></div>
+       </div>
 
-            <!-- Panel derecho: mayores deudas + accesos -->
-            <div class="right-col">
-
-            <!-- Top deudores -->
-            <div class="panel deudores">
-                <div class="panel-header">
-                    <h2 class="panel-titulo">Mayores deudas</h2>
-                    <a href="pages/personas.html" class="panel-link">
-                        Ver todos <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Movimientos del deudores -->
-                <div class="deudores-lista" id="deudores-lista"></div>
-
+        <!-- DERECHA -->
+        <div class="right-col">
+        <div class="panel deudores">
+            <div class="panel-header">
+                <h2 class="panel-titulo">Mayores deudas</h2>
+                <a href="pages/personas.html" class="panel-link">
+                    Ver todos <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+            <div class="deudores-lista" id="deudores-lista"></div>
             </div>
 
-            <!-- Accesos rápidos -->
             <div class="accesos-grid">
-                <a href="pages/personas.html" class="acceso-card">
-                    <i data-lucide="users"></i>
-                    <span>Clientes</span>
-                </a>
-                <a href="pages/historial.html" class="acceso-card">
-                    <i data-lucide="bar-chart-2"></i>
-                    <span>Historial</span>
-                </a>
-                <a href="pages/catalogo.html" class="acceso-card">
-                    <i data-lucide="shopping-bag"></i>
-                    <span>Catálogo</span>
-                </a>
+            <a href="pages/personas.html" class="acceso-card">
+                <i data-lucide="users"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="pages/historial.html" class="acceso-card">
+                <i data-lucide="bar-chart-2"></i>
+                <span>Historial</span>
+            </a>
+            <a href="pages/catalogo.html" class="acceso-card">
+                <i data-lucide="shopping-bag"></i>
+                <span>Catálogo</span>
+            </a>
             </div>
-
-            </div>
-
         </div>
+    </div>
 
     </main>
 
+    <script src="assets/js/components/api.js"></script>
     <script src="assets/js/components/init.js"></script>
+    <script src="assets/js/components/utils.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
