@@ -46,6 +46,27 @@
             </div>
         </div>
 
+        <!-- Controles de filtro -->
+        <div class="filtros-bar">
+            <div class="filtros-chips">
+                <button class="filtro-chip activo" data-tipo="todos">Todos</button>
+                <button class="filtro-chip" data-tipo="FIADO">Solo fiados</button>
+                <button class="filtro-chip" data-tipo="PAGO">Solo pagos</button>
+                <button class="filtro-chip" data-orden="monto-desc">Mayor monto</button>
+                <button class="filtro-chip" data-orden="monto-asc">Menor monto</button>
+            </div>
+            <div class="filtros-acciones">
+                <div class="hist-search-wrap">
+                    <i data-lucide="search" class="hist-search-icon"></i>
+                    <input type="text" id="buscador-hist" placeholder="Buscar persona…" />
+                </div>
+                <button class="btn-exportar" id="btn-exportar" title="Exportar CSV">
+                    <i data-lucide="download"></i>
+                    <span>CSV</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Tabla — el JS rellena tbody, título y contador -->
         <div class="movimientos-wrapper">
             <div class="movimientos-header">

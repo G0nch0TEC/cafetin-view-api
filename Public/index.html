@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/components/sidebar.css">
+    <link rel="stylesheet" href="assets/css/components/loader.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>DashBoard — Inicio</title>
 </head>
 <body>
     <div id="sidebar-container"></div>
+    <div id="loader-container"></div>
 
     <main class="page-content">
 
@@ -19,6 +21,12 @@
                 <h1 class="page-title"></h1>
                 <p class="page-subtitle"></p>
             </div>
+        </div>
+
+        <!-- Slider de insights -->
+        <div class="insights-slider">
+            <div class="insights-track" id="insights-track"></div>
+            <div class="insights-dots" id="insights-dots"></div>
         </div>
 
         <!-- Métricas principales -->
@@ -65,7 +73,9 @@
         <!-- Fila inferior: últimos movimientos + accesos rápidos -->
         <div class="bottom-grid">
 
-        <!-- IZQUIERDA -->
+        <!-- IZQUIERDA — dos paneles apilados -->
+        <div class="left-col">
+
         <div class="panel movimientos-recientes">
             <div class="panel-header">
                 <h2 class="panel-titulo">Movimientos de hoy</h2>
@@ -73,8 +83,20 @@
                 Ver historial <i data-lucide="arrow-right"></i>
                 </a>
             </div>
-        <div class="mov-lista" id="mov-lista"></div>
-       </div>
+            <div class="mov-lista" id="mov-lista"></div>
+        </div>
+
+        <div class="panel ranking-panel">
+            <div class="panel-header">
+                <h2 class="panel-titulo">Más pedidos hoy</h2>
+                <a href="pages/catalogo.html" class="panel-link">
+                    Ver catálogo <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+            <div class="ranking-lista" id="ranking-lista"></div>
+        </div>
+
+        </div><!-- /left-col -->
 
         <!-- DERECHA -->
         <div class="right-col">
