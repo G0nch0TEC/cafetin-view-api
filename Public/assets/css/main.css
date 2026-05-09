@@ -623,9 +623,6 @@ body {
 /* ══════════════════════════════
    MEJORA 3: GRÁFICO 7 DÍAS
 ══════════════════════════════ */
-.semana-chart-panel {
-    /* panel base ya aplicado */
-}
 
 .chart-legend {
     display: flex;
