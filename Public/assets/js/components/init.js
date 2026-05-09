@@ -18,12 +18,12 @@ components.forEach(async ({ id, path }) => {
     lucide.createIcons();
 
     if (id === 'sidebar-container') {
-        const currentPath = window.location.pathname;
-        el.querySelectorAll('a').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
-            }
+        marcarLinkActivo(el);
+
+        // Logo lleva al inicio
+        const toggle = el.querySelector('.sidebar-toggle');
+        if (toggle) toggle.addEventListener('click', () => {
+            window.location.href = '/cafetin-view-api/Public/index.html';
         });
     }
 });
@@ -45,4 +45,34 @@ function ocultarLoader() {
         el.classList.add('oculto');
         el.setAttribute('aria-hidden', 'true');
     }
+}
+
+
+// ── Link activo en sidebar ────────────────────────────
+function marcarLinkActivo(sidebar) {
+    const pathname = window.location.pathname;
+
+    // Mapa de páginas hijas → sección padre del sidebar
+    // detalle.html pertenece a "personas"
+    const padres = {
+        'detalle.html': 'personas.html'
+    };
+
+    // Nombre de archivo de la página actual
+    const archivo = pathname.split('/').pop() || 'index.html';
+
+    // Si es una página hija, apuntar al padre
+    const objetivo = padres[archivo] || archivo;
+
+    sidebar.querySelectorAll('.Group-a a').forEach(link => {
+        link.classList.remove('active');
+
+        const href = link.getAttribute('href') || '';
+        const nombreLink = href.split('/').pop();
+
+        // Match: el link termina en el mismo archivo que el objetivo
+        if (nombreLink === objetivo) {
+            link.classList.add('active');
+        }
+    });
 }

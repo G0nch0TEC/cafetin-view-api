@@ -20,9 +20,17 @@
                 <h1 class="page-title">Historial</h1>
                 <p class="page-subtitle">Movimientos por día</p>
             </div>
-            <div class="date-picker-wrap">
-                <i data-lucide="calendar" class="date-icon"></i>
-                <input type="date" id="fecha-selector" />
+            <div class="date-nav">
+                <button class="date-nav-btn" id="btn-anterior" title="Día anterior">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="date-picker-wrap">
+                    <i data-lucide="calendar" class="date-icon"></i>
+                    <input type="date" id="fecha-selector" />
+                </div>
+                <button class="date-nav-btn" id="btn-siguiente" title="Día siguiente">
+                    <i data-lucide="chevron-right"></i>
+                </button>
             </div>
         </div>
 
@@ -30,19 +38,28 @@
         <div class="resumen-dia">
             <div class="resumen-card">
                 <span class="resumen-label">Total fiado</span>
-                <span class="resumen-valor fiado">—</span>
+                <span class="resumen-valor fiado" id="val-fiado">—</span>
             </div>
             <div class="resumen-card">
                 <span class="resumen-label">Total pagado</span>
-                <span class="resumen-valor pago">—</span>
+                <span class="resumen-valor pago" id="val-pago">—</span>
             </div>
             <div class="resumen-card">
                 <span class="resumen-label">Diferencia</span>
-                <span class="resumen-valor deuda">—</span>
+                <span class="resumen-valor deuda" id="val-diferencia">—</span>
             </div>
-            <div class="resumen-card">
-                <span class="resumen-label">Movimientos</span>
-                <span class="resumen-valor neutro">—</span>
+            <div class="resumen-card donut-card">
+                <span class="resumen-label">Proporción</span>
+                <div class="donut-wrap">
+                    <svg class="donut-svg" id="donut-svg" viewBox="0 0 40 40">
+                        <circle class="donut-bg" cx="20" cy="20" r="15" fill="none" stroke-width="5"/>
+                        <circle class="donut-fiado" id="donut-fiado" cx="20" cy="20" r="15" fill="none" stroke-width="5"
+                            stroke-dasharray="0 94.25" stroke-dashoffset="23.56" stroke-linecap="round"/>
+                        <circle class="donut-pago" id="donut-pago" cx="20" cy="20" r="15" fill="none" stroke-width="5"
+                            stroke-dasharray="0 94.25" stroke-dashoffset="23.56" stroke-linecap="round"/>
+                    </svg>
+                    <span class="donut-label" id="donut-label">—</span>
+                </div>
             </div>
         </div>
 
@@ -86,6 +103,7 @@
                         </tr>
                     </thead>
                     <tbody></tbody>
+                    <tfoot id="tabla-tfoot"></tfoot>
                 </table>
             </div>
         </div>

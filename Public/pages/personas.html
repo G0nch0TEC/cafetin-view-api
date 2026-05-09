@@ -15,23 +15,40 @@
 
     <main class="page-content">
 
+        <!-- Header con resumen mejorado -->
         <div class="page-header">
             <div>
                 <h1 class="page-title">Clientes</h1>
-                <p class="page-subtitle">Personas registradas en el cafetín</p>
+                <p class="page-subtitle" id="header-resumen">Cargando...</p>
             </div>
             <div class="header-meta">
-                <span class="total-badge"></span>
+                <span class="total-badge" id="total-badge"></span>
             </div>
         </div>
 
-        <!-- Buscador -->
-        <div class="search-box">
-            <i data-lucide="search" class="search-icon"></i>
-            <input type="text" id="buscador" placeholder="Buscar persona..." />
+        <!-- Buscador + Filtros -->
+        <div class="toolbar">
+            <div class="search-box">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="buscador" placeholder="Buscar persona..." />
+            </div>
+            <div class="filtros">
+                <button class="filtro-btn activo" data-filtro="todos">Todos</button>
+                <button class="filtro-btn" data-filtro="deuda">Con deuda</button>
+                <button class="filtro-btn" data-filtro="al-dia">Al día</button>
+                <button class="filtro-btn" data-filtro="sin-mov">Sin movimiento</button>
+            </div>
+            <div class="orden-wrap">
+                <select id="orden-select">
+                    <option value="nombre">Nombre A–Z</option>
+                    <option value="mayor-deuda">Mayor deuda</option>
+                    <option value="reciente">Más reciente</option>
+                    <option value="inactivo">Más inactivo</option>
+                </select>
+            </div>
         </div>
 
-        <!-- Lista — el JS la rellena -->
+        <!-- Lista -->
         <div class="personas-lista" id="persona-lista"></div>
 
     </main>

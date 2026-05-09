@@ -401,3 +401,130 @@ body {
 .tabla-movimientos tbody tr.match-highlight {
     background: rgba(168, 85, 247, 0.05);
 }
+/* ══════════════════════════════
+   MEJORA 1: NAVEGACIÓN DÍA
+══════════════════════════════ */
+.date-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.date-nav-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(200, 160, 230, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #7c4fa0;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    flex-shrink: 0;
+}
+
+.date-nav-btn i { width: 16px; height: 16px; }
+
+.date-nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateX(-1px);
+}
+
+#btn-siguiente:hover:not(:disabled) { transform: translateX(1px); }
+
+.date-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ══════════════════════════════
+   MEJORA 2: MINI DONUT
+══════════════════════════════ */
+.resumen-card.donut-card {
+    position: relative;
+}
+
+.donut-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin-top: 2px;
+}
+
+.donut-svg {
+    width: 40px;
+    height: 40px;
+    transform: rotate(-90deg);
+    flex-shrink: 0;
+}
+
+.donut-bg {
+    stroke: rgba(200, 160, 230, 0.18);
+}
+
+.donut-fiado {
+    stroke: #c0392b;
+    opacity: 0.85;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+}
+
+.donut-pago {
+    stroke: #27ae60;
+    opacity: 0.85;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+}
+
+.donut-label {
+    position: absolute;
+    font-size: 9px;
+    font-weight: 700;
+    color: #3b1c4a;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: rotate(0deg);
+    /* centered over svg */
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ══════════════════════════════
+   MEJORA 3: TOTAL AL PIE
+══════════════════════════════ */
+.tfoot-row {
+    border-top: 1.5px solid rgba(200, 160, 230, 0.3);
+    background: rgba(245, 235, 255, 0.35);
+}
+
+.tfoot-label {
+    padding: 9px 1.25rem;
+    font-size: 11px;
+    font-weight: 600;
+    color: #9b79b4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.tfoot-valor {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 9px 1.25rem;
+    white-space: nowrap;
+}
+
+.tfoot-valor.fiado { color: #c0392b; }
+.tfoot-valor.pago  { color: #27ae60; }
+
+.tfoot-tipo {
+    padding: 9px 1.25rem;
+}

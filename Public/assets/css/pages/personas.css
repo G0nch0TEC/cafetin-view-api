@@ -1,6 +1,5 @@
 /* ══════════════════════════════════════════════════════
-   PERSONAS — Pastel + Glass
-   Public/assets/css/pages/personas.css
+   PERSONAS — Pastel + Glass  (mejorado)
 ══════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
@@ -57,10 +56,20 @@ body {
 }
 
 /* ══════════════════════════════
-   BUSCADOR
+   TOOLBAR: BUSCAR + FILTROS + ORDEN
 ══════════════════════════════ */
+.toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Buscador */
 .search-box {
     position: relative;
+    flex: 1;
+    min-width: 180px;
 }
 
 .search-icon {
@@ -76,7 +85,7 @@ body {
 
 .search-box input {
     width: 100%;
-    padding: 0.65rem 1rem 0.65rem 2.5rem;
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
     border: 1px solid rgba(200, 160, 230, 0.35);
     border-radius: 12px;
     font-size: 14px;
@@ -90,10 +99,63 @@ body {
 }
 
 .search-box input::placeholder { color: #c09fd8; }
-
 .search-box input:focus {
     border-color: #a855f7;
     box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+/* Filtros */
+.filtros {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(200, 160, 230, 0.35);
+    background: rgba(255, 255, 255, 0.45);
+    color: #7c4fa0;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+}
+
+.filtro-btn:hover {
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.filtro-btn.activo {
+    background: #a855f7;
+    color: #fff;
+    border-color: #a855f7;
+}
+
+/* Selector de orden */
+.orden-wrap select {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(200, 160, 230, 0.35);
+    background: rgba(255, 255, 255, 0.45);
+    color: #7c4fa0;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+}
+
+.orden-wrap select:focus {
+    border-color: #a855f7;
 }
 
 /* ══════════════════════════════
@@ -118,25 +180,16 @@ body {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 20px;
+    padding: 12px 20px;
     text-decoration: none;
     border-bottom: 1px solid rgba(200, 160, 230, 0.15);
     transition: background 0.15s;
     cursor: pointer;
 }
 
-.persona-row:last-child {
-    border-bottom: none;
-}
-
-.persona-row:hover {
-    background: rgba(255, 255, 255, 0.45);
-}
-
-.persona-row:hover .chevron {
-    transform: translateX(3px);
-    opacity: 1;
-}
+.persona-row:last-child { border-bottom: none; }
+.persona-row:hover { background: rgba(255, 255, 255, 0.45); }
+.persona-row:hover .chevron { transform: translateX(3px); opacity: 1; }
 
 /* Avatar */
 .persona-avatar {
@@ -161,7 +214,7 @@ body {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
 }
 
 .persona-nombre {
@@ -173,12 +226,43 @@ body {
     text-overflow: ellipsis;
 }
 
-.persona-desc {
-    font-size: 12px;
-    color: #9b79b4;
-    white-space: nowrap;
+/* Último movimiento */
+.persona-ultimo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #b89fcc;
+}
+
+.ultimo-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #b89fcc;
+    flex-shrink: 0;
+}
+
+.persona-ultimo.reciente { color: #27ae60; }
+.persona-ultimo.reciente .ultimo-dot { background: #27ae60; }
+.persona-ultimo.inactivo { color: #c0392b; }
+.persona-ultimo.inactivo .ultimo-dot { background: #c0392b; }
+
+/* Barra de deuda proporcional */
+.deuda-barra-wrap {
+    width: 100%;
+    height: 3px;
+    background: rgba(220, 60, 60, 0.12);
+    border-radius: 2px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.deuda-barra {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #f87171, #c0392b);
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Saldo + chevron */
@@ -209,7 +293,7 @@ body {
     border: 1px solid rgba(39, 174, 96, 0.2);
 }
 
-.saldo-chip.sin-mov {
+.saldo-chip.sin-movimientos {
     background: rgba(160, 100, 200, 0.08);
     color: #9b79b4;
     border: 1px solid rgba(160, 100, 200, 0.2);
@@ -230,4 +314,34 @@ body {
     text-align: center;
     color: #c09fd8;
     font-size: 14px;
+}
+
+/* Error */
+.error-estado {
+    padding: 2rem;
+    text-align: center;
+}
+
+.error-titulo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #c0392b;
+    margin-bottom: 4px;
+}
+
+.error-detalle {
+    font-size: 12px;
+    color: #9b79b4;
+    margin-bottom: 12px;
+}
+
+.error-estado button {
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    background: rgba(168, 85, 247, 0.08);
+    color: #7c3aed;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
 }

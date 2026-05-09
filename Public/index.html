@@ -39,6 +39,7 @@
                     <span class="metrica-valor"></span>
                     <span class="metrica-sub"></span>
                 </div>
+                <svg class="metrica-spark" id="spark-deuda" viewBox="0 0 60 20" preserveAspectRatio="none"></svg>
             </div>
 
             <div class="metrica-card pago">
@@ -48,6 +49,7 @@
                     <span class="metrica-valor"></span>
                     <span class="metrica-sub"></span>
                 </div>
+                <svg class="metrica-spark" id="spark-cobrado" viewBox="0 0 60 20" preserveAspectRatio="none"></svg>
             </div>
 
             <div class="metrica-card fiado">
@@ -57,6 +59,7 @@
                     <span class="metrica-valor"></span>
                     <span class="metrica-sub"></span>
                 </div>
+                <svg class="metrica-spark" id="spark-fiado" viewBox="0 0 60 20" preserveAspectRatio="none"></svg>
             </div>
 
             <div class="metrica-card neutro">
@@ -66,8 +69,29 @@
                     <span class="metrica-valor"></span>
                     <span class="metrica-sub"></span>
                 </div>
+                <svg class="metrica-spark" id="spark-personas" viewBox="0 0 60 20" preserveAspectRatio="none"></svg>
             </div>
 
+        </div>
+
+        <!-- Indicador de frescura de datos -->
+        <div class="data-freshness" id="data-freshness">
+            <i data-lucide="clock"></i>
+            <span id="freshness-text">Cargando datos...</span>
+        </div>
+
+        <!-- Gráfico últimos 7 días -->
+        <div class="panel semana-chart-panel">
+            <div class="panel-header">
+                <h2 class="panel-titulo">Cobrado vs Fiado — últimos 7 días</h2>
+                <div class="chart-legend">
+                    <span class="legend-dot cobrado"></span><span>Cobrado</span>
+                    <span class="legend-dot fiado"></span><span>Fiado</span>
+                </div>
+            </div>
+            <div class="semana-chart-wrap">
+                <div class="semana-chart" id="semana-chart"></div>
+            </div>
         </div>
 
         <!-- Fila inferior: últimos movimientos + accesos rápidos -->
