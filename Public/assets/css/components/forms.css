@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════════════
+   FORMS — Inputs, selects y botones de acción
+   Public/assets/css/components/forms.css
+
+   Consolida .search-box (duplicado en catalogo.css y
+   personas.css), inputs de fecha (historial.css),
+   selects de filtro, chips/filtros y botones pill
+   que estaban dispersos en todos los archivos de página.
+══════════════════════════════════════════════════════ */
+
+/* ── Search box ──────────────────────────────────────── */
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 180px;
+}
+
+.search-box__icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--color-text-faint);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.4rem;
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-title);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    outline: none;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.search-box input::placeholder {
+    color: var(--color-text-faint);
+}
+
+.search-box input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+/* ── Input fecha ─────────────────────────────────────── */
+.date-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.date-input-wrap__icon {
+    position: absolute;
+    left: 12px;
+    width: 15px;
+    height: 15px;
+    color: var(--color-primary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.date-input-wrap input[type="date"] {
+    padding: 0.6rem 1rem 0.6rem 2.4rem;
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-title);
+    background: rgba(255, 255, 255, 0.52);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.date-input-wrap input[type="date"]:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+/* ── Select / orden ──────────────────────────────────── */
+.select-glass {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    color: var(--color-text-body);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    white-space: nowrap;
+}
+
+.select-glass:hover,
+.select-glass:focus {
+    border-color: #d8b4fe;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08);
+}
+
+/* ── Chip / filtro pill ──────────────────────────────── */
+/* Usado en: filtros de historial, detalle y catálogo   */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-input);
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-body);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.chip:hover {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: rgba(168, 85, 247, 0.35);
+}
+
+.chip.activo {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+/* ── Botón pill (volver, exportar, acciones) ─────────── */
+.btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-input);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-body);
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    transition:
+        background var(--transition-base),
+        border-color var(--transition-base);
+}
+
+.btn-pill i {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-pill:hover {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: #d8b4fe;
+}
+
+/* ── Barra de controles (search + filtros + select) ──── */
+.controles-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}

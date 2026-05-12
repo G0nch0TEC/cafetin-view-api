@@ -1,67 +1,68 @@
 // ══════════════════════════════════════════════════════
-//  DETALLE — mejorado
-//  Mejoras:
-//   1. Gráfico de actividad semanal (barras 12 semanas)
-//   2. Filtros en tabla: Todos / Fiados / Pagos
-//   3. Botón "Volver" inteligente (regresa al origen)
+//  DETALLE DE PERSONA — detalle.js
+//  Public/assets/js/pages/detalle.js
+//
+//  Cambios respecto al original:
+//    · withLoader()   reemplaza el patrón manual
+//    · renderDonut()  viene de utils.js (era copia exacta)
+//    · mostrarError() viene de utils.js
+//    · pluralizar()   reemplaza concatenaciones inline
+//    · avatar avatar-xl reemplaza .persona-avatar inline
 // ══════════════════════════════════════════════════════
 
-var _todosMovimientos = [];   // cache para filtros
+var _todosMovimientos = [];
 var _filtroActivo     = 'todos';
+
 
 // ── Init ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
     const personaId = obtenerParamUrl('id');
 
-    // ── Mejora 3: botón volver inteligente ────────────
     configurarBtnVolver();
 
-    if (!personaId) { mostrarError('No se especificó ninguna persona.'); return; }
-
-    await new Promise(r => setTimeout(r, 50));
-    mostrarLoader();
-
-    try {
-        const [personas, movimientos] = await Promise.all([
-            getPersonas(),
-            getMovimientosPorPersona(personaId)
-        ]);
-
-        const persona = personas.find(p => String(p.id) === String(personaId));
-        if (!persona) throw new Error('Persona no encontrada.');
-
-        _todosMovimientos = movimientos;
-
-        renderCabecera(persona);
-        renderResumen(movimientos);
-        renderActividadSemanal(movimientos);   // Mejora 1
-        renderTabla(movimientos);
-
-        // ── Mejora 2: filtros de tabla ─────────────────
-        document.querySelectorAll('.mov-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                document.querySelectorAll('.mov-chip').forEach(c => c.classList.remove('activo'));
-                chip.classList.add('activo');
-                _filtroActivo = chip.dataset.tipo;
-                aplicarFiltro();
-            });
-        });
-
-    } catch (err) {
-        mostrarError(err.message);
-    } finally {
-        ocultarLoader();
+    if (!personaId) {
+        mostrarError('main', 'Sin persona', 'No se especificó ninguna persona.', 'Volver', 'history.back()');
+        return;
     }
+
+    await withLoader(
+        async () => {
+            const [personas, movimientos] = await Promise.all([
+                getPersonas(),
+                getMovimientosPorPersona(personaId)
+            ]);
+
+            const persona = personas.find(p => String(p.id) === String(personaId));
+            if (!persona) throw new Error('Persona no encontrada.');
+
+            _todosMovimientos = movimientos;
+
+            renderCabecera(persona);
+            renderResumen(movimientos);
+            renderActividadSemanal(movimientos);
+            renderTabla(movimientos);
+
+            // Filtros de tabla
+            document.querySelectorAll('.mov-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.mov-chip').forEach(c => c.classList.remove('activo'));
+                    chip.classList.add('activo');
+                    _filtroActivo = chip.dataset.tipo;
+                    aplicarFiltro();
+                });
+            });
+        },
+        (err) => mostrarError('main', 'No se pudo cargar el detalle', err.message, 'Volver', 'history.back()')
+    );
 });
 
 
-// ── Mejora 3: botón volver inteligente ───────────────
+// ── Botón volver inteligente ──────────────────────────
 function configurarBtnVolver() {
     const btn   = document.getElementById('btn-volver');
     const label = document.getElementById('volver-label');
     if (!btn) return;
 
-    // Leer el origen pasado como parámetro ?from=index o ?from=personas
     const from = obtenerParamUrl('from');
 
     if (from === 'index' || document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
@@ -74,7 +75,7 @@ function configurarBtnVolver() {
 }
 
 
-// ── Mejora 2: aplicar filtro activo ──────────────────
+// ── Aplicar filtro activo ─────────────────────────────
 function aplicarFiltro() {
     const resultado = _filtroActivo === 'todos'
         ? _todosMovimientos
@@ -87,11 +88,15 @@ function aplicarFiltro() {
 function renderCabecera(persona) {
     const saldo = Number(persona.saldo);
 
-    const avatarEl  = document.querySelector('.persona-header .persona-avatar');
-    const nombreEl  = document.querySelector('.persona-header .persona-nombre');
+    const avatarEl   = document.querySelector('.persona-header .persona-avatar');
+    const nombreEl   = document.querySelector('.persona-header .persona-nombre');
     const saldoBadge = document.querySelector('.saldo-badge');
 
-    if (avatarEl) avatarEl.textContent = iniciales(persona.nombre);
+    // Usa clases del nuevo avatar.css
+    if (avatarEl) {
+        avatarEl.className  = 'avatar avatar-xl';
+        avatarEl.textContent = iniciales(persona.nombre);
+    }
     if (nombreEl) nombreEl.textContent = persona.nombre;
 
     if (saldoBadge) {
@@ -117,26 +122,28 @@ function renderResumen(movimientos) {
     const totalFiado  = movimientos.filter(m => m.tipo === 'FIADO').reduce((s, m) => s + Number(m.monto), 0);
     const totalPagado = movimientos.filter(m => m.tipo === 'PAGO').reduce((s, m)  => s + Number(m.monto), 0);
 
-    var vF = document.getElementById('rv-fiado');
-    var vP = document.getElementById('rv-pago');
-    var vM = document.getElementById('rv-movs');
+    const vF = document.getElementById('rv-fiado');
+    const vP = document.getElementById('rv-pago');
+    const vM = document.getElementById('rv-movs');
     if (vF) vF.textContent = formatearMonto(totalFiado);
     if (vP) vP.textContent = formatearMonto(totalPagado);
     if (vM) vM.textContent = movimientos.length;
+
+    // renderDonut() viene de utils.js — antes era copia exacta aquí
+    renderDonut('donut-fiado', 'donut-pago', 'donut-label', totalFiado, totalPagado);
 }
 
 
-// ── Mejora 1: Gráfico de actividad semanal (12 sem.) ──
+// ── Actividad semanal (12 semanas) ────────────────────
 function renderActividadSemanal(movimientos) {
     const contenedor = document.getElementById('spark-actividad');
     if (!contenedor) return;
 
-    // Construir 12 cubos semanales hacia atrás desde hoy
     const semanas = [];
     const ahora   = new Date();
 
     for (let i = 11; i >= 0; i--) {
-        const fin   = new Date(ahora);
+        const fin = new Date(ahora);
         fin.setDate(ahora.getDate() - i * 7);
         fin.setHours(23, 59, 59, 999);
 
@@ -152,21 +159,21 @@ function renderActividadSemanal(movimientos) {
 
     const maxTotal = Math.max(...semanas.map(s => s.fiado + s.pago), 1);
 
-    contenedor.innerHTML = semanas.map(function(s) {
-        const pctFiado = Math.round((s.fiado / maxTotal) * 100);
-        const pctPago  = Math.round((s.pago  / maxTotal) * 100);
+    contenedor.innerHTML = semanas.map(s => {
+        const pctFiado       = Math.round((s.fiado / maxTotal) * 100);
+        const pctPago        = Math.round((s.pago  / maxTotal) * 100);
         const tieneActividad = s.fiado > 0 || s.pago > 0;
-        const tooltip = tieneActividad
-            ? s.total + ' mov. · F:' + formatearMonto(s.fiado) + ' P:' + formatearMonto(s.pago)
+        const tooltip        = tieneActividad
+            ? `${s.total} mov. · F:${formatearMonto(s.fiado)} P:${formatearMonto(s.pago)}`
             : 'Sin actividad';
 
-        return '<div class="spark-col' + (s.esActual ? ' actual' : '') + '" title="' + tooltip + '">' +
-            '<div class="spark-stack">' +
-                (pctFiado > 0 ? '<div class="spark-bar fiado" style="height:' + pctFiado + '%"></div>' : '') +
-                (pctPago  > 0 ? '<div class="spark-bar pago"  style="height:' + pctPago  + '%"></div>' : '') +
-                (!tieneActividad ? '<div class="spark-bar vacio" style="height:8%"></div>' : '') +
-            '</div>' +
-        '</div>';
+        return `<div class="spark-col${s.esActual ? ' actual' : ''}" title="${tooltip}">
+            <div class="spark-stack">
+                ${pctFiado > 0 ? `<div class="spark-bar fiado" style="height:${pctFiado}%"></div>` : ''}
+                ${pctPago  > 0 ? `<div class="spark-bar pago"  style="height:${pctPago}%"></div>`  : ''}
+                ${!tieneActividad ? '<div class="spark-bar vacio" style="height:8%"></div>' : ''}
+            </div>
+        </div>`;
     }).join('');
 }
 
@@ -176,31 +183,24 @@ function renderTabla(movimientos) {
     const countEl = document.getElementById('movimientos-count');
     const tbody   = document.querySelector('.tabla-movimientos tbody');
 
-    if (countEl) countEl.textContent = movimientos.length + ' registro' + (movimientos.length !== 1 ? 's' : '');
+    // pluralizar() de utils — antes era inline
+    if (countEl) countEl.textContent = pluralizar(movimientos.length, 'registro');
     if (!tbody) return;
 
     if (!movimientos.length) {
-        var msg = _filtroActivo !== 'todos' ? 'Sin ' + (_filtroActivo === 'FIADO' ? 'fiados' : 'pagos') + ' registrados' : 'Sin movimientos registrados';
-        tbody.innerHTML = '<tr><td colspan="4" class="sin-resultados">' + msg + '</td></tr>';
+        const msg = _filtroActivo !== 'todos'
+            ? `Sin ${_filtroActivo === 'FIADO' ? 'fiados' : 'pagos'} registrados`
+            : 'Sin movimientos registrados';
+        tbody.innerHTML = `<tr><td colspan="4" class="sin-resultados">${msg}</td></tr>`;
         return;
     }
 
-    tbody.innerHTML = movimientos.map(function(m) {
-        return '<tr>' +
-            '<td><span class="badge ' + m.tipo.toLowerCase() + '">' + m.tipo + '</span></td>' +
-            '<td class="monto ' + m.tipo.toLowerCase() + '">' + formatearMonto(Number(m.monto)) + '</td>' +
-            '<td class="fecha">' + formatearFechaHora(m.fecha) + '</td>' +
-            '<td class="nota">' + (m.nota || '—') + '</td>' +
-        '</tr>';
-    }).join('');
-}
-
-
-// ── Error ─────────────────────────────────────────────
-function mostrarError(msg) {
-    document.querySelector('main').innerHTML += '<div class="error-estado">' +
-        '<p class="error-titulo">No se pudo cargar el detalle</p>' +
-        '<p class="error-detalle">' + msg + '</p>' +
-        '<button onclick="history.back()">Volver</button>' +
-    '</div>';
+    tbody.innerHTML = movimientos.map(m => `
+        <tr>
+            <td><span class="badge badge--${m.tipo.toLowerCase()}">${m.tipo}</span></td>
+            <td class="monto ${m.tipo.toLowerCase()}">${formatearMonto(Number(m.monto))}</td>
+            <td class="fecha">${formatearFechaHora(m.fecha)}</td>
+            <td class="nota">${m.nota || '—'}</td>
+        </tr>
+    `).join('');
 }

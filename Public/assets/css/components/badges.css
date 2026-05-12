@@ -1,0 +1,95 @@
+/* ══════════════════════════════════════════════════════
+   BADGES Y CHIPS
+   Public/assets/css/components/badges.css
+
+   Consolida .badge (duplicado en detalle.css e
+   historial.css), .saldo-chip (personas.css),
+   .insight-badge (main.css) y .mov-monto (main.css)
+   en un sistema uniforme de etiquetas.
+
+   Clases disponibles:
+     .badge              → etiqueta base (inline)
+     .badge--fiado       → rojo  (deuda)
+     .badge--pago        → verde (pago)
+     .badge--neutro      → morado (neutral)
+     .badge--warning     → naranja (alerta)
+
+     .monto              → valor numérico coloreado
+     .monto--fiado       → rojo
+     .monto--pago        → verde
+══════════════════════════════════════════════════════ */
+
+/* ── Badge base ──────────────────────────────────────── */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+}
+
+/* ── Modificadores de color ──────────────────────────── */
+.badge--fiado {
+    background: var(--color-danger-light);
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger-border);
+}
+
+.badge--pago {
+    background: var(--color-success-light);
+    color: var(--color-success);
+    border: 1px solid var(--color-success-border);
+}
+
+.badge--neutro {
+    background: rgba(168, 85, 247, 0.08);
+    color: var(--color-primary);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.badge--warning {
+    background: var(--color-warning-light);
+    color: var(--color-warning);
+    border: 1px solid rgba(230, 126, 34, 0.25);
+}
+
+/* ── Saldo chip (usado en lista de personas) ─────────── */
+/* Igual que .badge pero sin borde y padding distinto    */
+.saldo-chip {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+}
+
+.saldo-chip.deuda {
+    background: var(--color-danger-light);
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger-border);
+}
+
+.saldo-chip.al-dia {
+    background: var(--color-success-light);
+    color: var(--color-success);
+    border: 1px solid var(--color-success-border);
+}
+
+.saldo-chip.sin-movimientos {
+    background: rgba(160, 100, 200, 0.08);
+    color: var(--color-text-muted);
+    border: 1px solid rgba(160, 100, 200, 0.2);
+}
+
+/* ── Monto coloreado (texto en listas y tablas) ──────── */
+/* Reemplaza .mov-monto.fiado / .mov-monto.pago y
+   .tabla-movimientos td.monto.fiado / .pago           */
+.monto {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.monto--fiado { color: var(--color-danger); }
+.monto--pago  { color: var(--color-success); }

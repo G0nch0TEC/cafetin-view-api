@@ -1,0 +1,186 @@
+/* ══════════════════════════════════════════════════════
+   TABLA DE MOVIMIENTOS
+   Public/assets/css/components/tabla.css
+
+   Consolida .movimientos-wrapper, .movimientos-header,
+   .tabla-movimientos y sus celdas que estaban copiados
+   casi exactos en detalle.css e historial.css.
+══════════════════════════════════════════════════════ */
+
+/* ── Wrapper contenedor ──────────────────────────────── */
+/* Extiende .glass — solo añade lo específico de tabla  */
+.movimientos-wrapper {
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--glass-shadow-lg);
+}
+
+/* ── Cabecera del wrapper ────────────────────────────── */
+.movimientos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-divider);
+}
+
+.movimientos-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-title);
+}
+
+.movimientos-count {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    background: rgba(168, 85, 247, 0.08);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+}
+
+/* ── Scroll horizontal ───────────────────────────────── */
+.tabla-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 320px;
+}
+
+/* thead fijo al hacer scroll vertical */
+.tabla-movimientos thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* ── Tabla base ──────────────────────────────────────── */
+.tabla-movimientos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+/* ── Encabezado ──────────────────────────────────────── */
+.tabla-movimientos thead tr {
+    background: rgba(245, 235, 255, 0.95);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+}
+
+.tabla-movimientos th {
+    padding: 10px 1.5rem;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+}
+
+/* ── Filas de cuerpo ─────────────────────────────────── */
+.tabla-movimientos tbody tr {
+    border-top: 1px solid var(--border-row);
+    transition: background var(--transition-fast);
+}
+
+.tabla-movimientos tbody tr:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.tabla-movimientos tbody tr.match-highlight {
+    background: rgba(168, 85, 247, 0.05);
+}
+
+/* ── Celdas base ─────────────────────────────────────── */
+.tabla-movimientos td {
+    padding: 12px 1.5rem;
+    vertical-align: middle;
+    color: var(--color-text-title);
+}
+
+/* ── Celda persona con mini avatar ──────────────────── */
+.persona-cell {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ── Celda monto ─────────────────────────────────────── */
+.tabla-movimientos td.monto {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabla-movimientos td.monto.fiado { color: var(--color-danger); }
+.tabla-movimientos td.monto.pago  { color: var(--color-success); }
+
+/* ── Celda fecha / hora ──────────────────────────────── */
+.tabla-movimientos td.fecha,
+.tabla-movimientos td.hora {
+    color: #7c5fa0;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ── Celda nota ──────────────────────────────────────── */
+.tabla-movimientos td.nota {
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+/* ── Fila de totales (tfoot) ─────────────────────────── */
+.tfoot-row {
+    border-top: 1.5px solid var(--border-divider);
+    background: rgba(245, 235, 255, 0.35);
+}
+
+.tfoot-label {
+    padding: 9px 1.5rem;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.tfoot-valor {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 9px 1.5rem;
+    white-space: nowrap;
+}
+
+.tfoot-valor.fiado { color: var(--color-danger); }
+.tfoot-valor.pago  { color: var(--color-success); }
+
+.tfoot-tipo {
+    padding: 9px 1.5rem;
+}
+
+/* ── Sin resultados / sin datos ──────────────────────── */
+.sin-datos,
+.sin-resultados {
+    padding: 2.5rem;
+    text-align: center;
+    color: var(--color-text-faint);
+    font-size: 13px;
+}
+
+/* ── Scrollbar de tabla ──────────────────────────────── */
+.tabla-scroll::-webkit-scrollbar       { width: 4px; height: 4px; }
+.tabla-scroll::-webkit-scrollbar-track { background: transparent; }
+.tabla-scroll::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.25);
+    border-radius: 2px;
+}
+.tabla-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.5);
+}

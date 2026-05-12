@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/pages/detalle.css">
+    <!-- base -->
+    <link rel="stylesheet" href="../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../assets/css/base/layout.css">
+    <!-- components -->
+    <link rel="stylesheet" href="../assets/css/components/glass.css">
+    <link rel="stylesheet" href="../assets/css/components/avatar.css">
+    <link rel="stylesheet" href="../assets/css/components/badges.css">
+    <link rel="stylesheet" href="../assets/css/components/forms.css">
+    <link rel="stylesheet" href="../assets/css/components/tabla.css">
     <link rel="stylesheet" href="../assets/css/components/sidebar.css">
     <link rel="stylesheet" href="../assets/css/components/loader.css">
+    <!-- page -->
+    <link rel="stylesheet" href="../assets/css/pages/detalle.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>DashBoard — Detalle</title>
 </head>
@@ -16,13 +27,13 @@
     <main class="page-content">
 
         <div class="page-header">
-            <a href="personas.html" class="btn-volver">
+            <a id="btn-volver" href="personas.html" class="btn-volver">
                 <i data-lucide="arrow-left"></i>
-                Volver
+                <span id="volver-label">Volver</span>
             </a>
         </div>
 
-        <!-- Cabecera de la persona — el JS rellena avatar, nombre y saldo -->
+        <!-- Cabecera de la persona -->
         <div class="persona-header">
             <div class="persona-avatar"></div>
             <div class="persona-info">
@@ -35,27 +46,38 @@
             </div>
         </div>
 
-        <!-- Resumen rápido — el JS actualiza los valores -->
+        <!-- Resumen rápido — IDs requeridos por detalle.js -->
         <div class="resumen-grid">
             <div class="resumen-card">
                 <span class="resumen-label">Total fiado</span>
-                <span class="resumen-valor fiado">—</span>
+                <span class="resumen-valor fiado" id="rv-fiado">—</span>
             </div>
             <div class="resumen-card">
                 <span class="resumen-label">Total pagado</span>
-                <span class="resumen-valor pago">—</span>
+                <span class="resumen-valor pago" id="rv-pago">—</span>
             </div>
             <div class="resumen-card">
                 <span class="resumen-label">Movimientos</span>
-                <span class="resumen-valor neutro">—</span>
+                <span class="resumen-valor neutro" id="rv-movs">—</span>
+            </div>
+            <div class="resumen-card spark-card">
+                <span class="resumen-label">Actividad (12 sem.)</span>
+                <div class="spark-bars" id="spark-actividad"></div>
             </div>
         </div>
 
-        <!-- Tabla de movimientos — el JS rellena tbody y contador -->
+        <!-- Tabla de movimientos -->
         <div class="movimientos-wrapper">
             <div class="movimientos-header">
                 <h2 class="movimientos-titulo">Movimientos</h2>
-                <span class="movimientos-count"></span>
+                <div class="mov-controles">
+                    <div class="mov-filtros">
+                        <button class="mov-chip activo" data-tipo="todos">Todos</button>
+                        <button class="mov-chip" data-tipo="FIADO">Fiados</button>
+                        <button class="mov-chip" data-tipo="PAGO">Pagos</button>
+                    </div>
+                    <span class="movimientos-count" id="movimientos-count"></span>
+                </div>
             </div>
 
             <div class="tabla-scroll">
@@ -75,9 +97,9 @@
 
     </main>
 
-    <script src="../assets/js/components/init.js"></script>
-    <script src="../assets/js/components/api.js"></script>
-    <script src="../assets/js/components/utils.js"></script>
+    <script src="../assets/js/helper/init.js"></script>
+    <script src="../assets/js/helper/utils.js"></script>
+    <script src="../assets/js/service/api.js"></script>
     <script src="../assets/js/pages/detalle.js"></script>
 </body>
 </html>

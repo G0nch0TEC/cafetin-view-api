@@ -1,0 +1,87 @@
+/* ══════════════════════════════════════════════════════
+   GLASS — Efecto vidrio / glassmorphism
+   Public/assets/css/components/glass.css
+
+   Consolida todos los bloques de backdrop-filter +
+   rgba que hoy están hardcodeados con valores
+   ligeramente distintos en cada archivo de página.
+
+   Clases disponibles:
+     .glass          → panel base (blur fuerte)
+     .glass-sm       → card compacta (blur medio)
+     .glass-xs       → input / botón (blur suave)
+     .glass-header   → cabecera de panel con borde inferior
+     .glass-row      → fila de lista con hover
+══════════════════════════════════════════════════════ */
+
+/* ── Panel base ──────────────────────────────────────── */
+/* Usado en: .panel, .personas-lista, .movimientos-wrapper,
+             .catalogo-wrapper, .persona-header           */
+.glass {
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--glass-shadow-lg);
+}
+
+/* ── Card compacta ───────────────────────────────────── */
+/* Usado en: .metrica-card, .resumen-card, .insight-card,
+             .acceso-card                                 */
+.glass-sm {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-sm);
+    -webkit-backdrop-filter: var(--glass-blur-sm);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow-sm);
+}
+
+/* ── Elemento interactivo pequeño ────────────────────── */
+/* Usado en: inputs, selects, botones pill, chips, filtros */
+.glass-xs {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: var(--glass-blur-xs);
+    -webkit-backdrop-filter: var(--glass-blur-xs);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+}
+
+/* ── Cabecera de panel ───────────────────────────────── */
+/* Usado en: .panel-header, .movimientos-header          */
+.glass-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-divider);
+}
+
+/* ── Fila de lista con hover ─────────────────────────── */
+/* Usado en: .mov-item, .deudor-row, .ranking-row,
+             .persona-row, filas de tabla               */
+.glass-row {
+    border-bottom: 1px solid var(--border-row);
+    transition: background var(--transition-fast);
+}
+
+.glass-row:last-child {
+    border-bottom: none;
+}
+
+.glass-row:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Scrollbar para contenedores glass con overflow ─── */
+.glass-scroll::-webkit-scrollbar       { width: 4px; }
+.glass-scroll::-webkit-scrollbar-track { background: transparent; }
+.glass-scroll::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.25);
+    border-radius: 2px;
+}
+.glass-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.5);
+}

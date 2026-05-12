@@ -1,0 +1,63 @@
+/* ══════════════════════════════════════════════════════
+   LAYOUT DE PÁGINA
+   Public/assets/css/base/layout.css
+
+   Consolida .page-content, .page-title, .page-subtitle
+   y .page-header que hoy están duplicados en
+   main.css, catalogo.css, historial.css y personas.css.
+══════════════════════════════════════════════════════ */
+
+/* ── Área principal de contenido ─────────────────────── */
+.page-content {
+    flex: 1;
+    min-width: 0;          /* evita que flex desborde */
+    height: 100vh;
+    padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ── Encabezado de sección ───────────────────────────── */
+.page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0; /* cada página ajusta si necesita más espacio */
+}
+
+/* ── Títulos ─────────────────────────────────────────── */
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-title);
+    letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-top: 3px;
+}
+
+/* ── Scrollbar personalizado (aplica a page-content) ─── */
+.page-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.page-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.page-content::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.25);
+    border-radius: 2px;
+}
+
+.page-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.5);
+}

@@ -1,0 +1,59 @@
+/* ══════════════════════════════════════════════════════
+   AVATAR
+   Public/assets/css/components/avatar.css
+
+   Consolida .mini-avatar (duplicado en main.css y
+   historial.css) y .persona-avatar (variantes en
+   detalle.css y personas.css) en un solo lugar.
+
+   Clases disponibles:
+     .avatar         → base (tamaño por modificador)
+     .avatar-sm      → 28px  (historial, listas)
+     .avatar-md      → 32px  (dashboard, movimientos)
+     .avatar-lg      → 42px  (lista de personas)
+     .avatar-xl      → 52px  (cabecera detalle persona)
+══════════════════════════════════════════════════════ */
+
+/* ── Base ────────────────────────────────────────────── */
+.avatar {
+    border-radius: var(--radius-circle);
+    background: var(--avatar-gradient);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--color-primary-deeper);
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ── Tamaños ─────────────────────────────────────────── */
+.avatar-sm {
+    width: 28px;
+    height: 28px;
+    font-size: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.avatar-md {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.avatar-lg {
+    width: 42px;
+    height: 42px;
+    font-size: 13px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.avatar-xl {
+    width: 52px;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+}

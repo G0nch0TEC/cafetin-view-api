@@ -1,6 +1,13 @@
 // ══════════════════════════════════════════════════════
-//  INIT — carga de componentes globales
-//  Public/assets/js/init.js
+//  INIT — Carga de componentes globales
+//  Public/assets/js/components/init.js
+//
+//  Añade withLoader() que elimina el patrón:
+//    await new Promise(r => setTimeout(r, 50));
+//    mostrarLoader();
+//    try { ... } finally { ocultarLoader(); }
+//  copiado en main.js, catalogo.js, detalle.js
+//  e historial.js.
 // ══════════════════════════════════════════════════════
 
 const components = [
@@ -20,7 +27,6 @@ components.forEach(async ({ id, path }) => {
     if (id === 'sidebar-container') {
         marcarLinkActivo(el);
 
-        // Logo lleva al inicio
         const toggle = el.querySelector('.sidebar-toggle');
         if (toggle) toggle.addEventListener('click', () => {
             window.location.href = '/cafetin-view-api/Public/index.html';
@@ -28,8 +34,8 @@ components.forEach(async ({ id, path }) => {
     }
 });
 
+
 // ── Loader global ─────────────────────────────────────
-// Llamar desde cualquier pages/*.js antes/después del fetch
 
 function mostrarLoader() {
     const el = document.getElementById('loader-overlay');
@@ -47,32 +53,66 @@ function ocultarLoader() {
     }
 }
 
+/**
+ * Envuelve una función async con el ciclo completo del loader:
+ * delay visual → mostrar loader → ejecutar → ocultar loader.
+ *
+ * Reemplaza este patrón copiado en 4 archivos de página:
+ *
+ *   await new Promise(r => setTimeout(r, 50));
+ *   mostrarLoader();
+ *   try {
+ *       await fn();
+ *   } finally {
+ *       ocultarLoader();
+ *   }
+ *
+ * Uso:
+ *   await withLoader(async () => {
+ *       const data = await getPersonas();
+ *       renderLista(data);
+ *   });
+ *
+ * Opcionalmente acepta un callback onError para manejar
+ * el error dentro de la página sin perder el ocultarLoader.
+ *
+ * @param {Function} fn        — función async a ejecutar
+ * @param {Function} [onError] — callback(err) opcional
+ */
+async function withLoader(fn, onError) {
+    await new Promise(r => setTimeout(r, 50));
+    mostrarLoader();
+    try {
+        await fn();
+    } catch (err) {
+        if (onError) {
+            onError(err);
+        } else {
+            console.error('[withLoader]', err.message);
+        }
+    } finally {
+        ocultarLoader();
+    }
+}
+
 
 // ── Link activo en sidebar ────────────────────────────
+
 function marcarLinkActivo(sidebar) {
     const pathname = window.location.pathname;
 
-    // Mapa de páginas hijas → sección padre del sidebar
-    // detalle.html pertenece a "personas"
+    // Páginas hijas → sección padre del sidebar
     const padres = {
         'detalle.html': 'personas.html'
     };
 
-    // Nombre de archivo de la página actual
-    const archivo = pathname.split('/').pop() || 'index.html';
-
-    // Si es una página hija, apuntar al padre
+    const archivo  = pathname.split('/').pop() || 'index.html';
     const objetivo = padres[archivo] || archivo;
 
     sidebar.querySelectorAll('.Group-a a').forEach(link => {
         link.classList.remove('active');
-
-        const href = link.getAttribute('href') || '';
+        const href      = link.getAttribute('href') || '';
         const nombreLink = href.split('/').pop();
-
-        // Match: el link termina en el mismo archivo que el objetivo
-        if (nombreLink === objetivo) {
-            link.classList.add('active');
-        }
+        if (nombreLink === objetivo) link.classList.add('active');
     });
 }
