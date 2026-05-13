@@ -1,14 +1,38 @@
 // ══════════════════════════════════════════════════════
 //  INIT — Carga de componentes globales
 //  Public/assets/js/components/init.js
-//
-//  Añade withLoader() que elimina el patrón:
-//    await new Promise(r => setTimeout(r, 50));
-//    mostrarLoader();
-//    try { ... } finally { ocultarLoader(); }
-//  copiado en main.js, catalogo.js, detalle.js
-//  e historial.js.
 // ══════════════════════════════════════════════════════
+
+// ── Guard de sesión ───────────────────────────────────
+// Redirige a login si no hay sesión activa.
+// Se ejecuta antes que todo lo demás.
+
+(function checkAuth() {
+    const SESION_KEY = 'cafetin_sesion';
+    const paginaActual = window.location.pathname;
+
+    // No proteger la página de login
+    if (paginaActual.includes('login.html')) return;
+
+    const raw = localStorage.getItem(SESION_KEY);
+    if (!raw) {
+        window.location.replace('/cafetin-view-api/Public/login.html');
+        return;
+    }
+    try {
+        const { expiresAt } = JSON.parse(raw);
+        if (Date.now() >= expiresAt) {
+            localStorage.removeItem(SESION_KEY);
+            window.location.replace('/cafetin-view-api/Public/login.html');
+        }
+    } catch {
+        localStorage.removeItem(SESION_KEY);
+        window.location.replace('/cafetin-view-api/Public/login.html');
+    }
+})();
+
+
+// ── Componentes globales ──────────────────────────────
 
 const components = [
     { id: 'sidebar-container', path: '/cafetin-view-api/Public/components/sidebar.html' },
@@ -31,6 +55,15 @@ components.forEach(async ({ id, path }) => {
         if (toggle) toggle.addEventListener('click', () => {
             window.location.href = '/cafetin-view-api/Public/index.html';
         });
+
+        // Botón cerrar sesión en el sidebar
+        const btnSalir = el.querySelector('#btn-cerrar-sesion');
+        if (btnSalir) {
+            btnSalir.addEventListener('click', () => {
+                localStorage.removeItem('cafetin_sesion');
+                window.location.href = '/cafetin-view-api/Public/login.html';
+            });
+        }
     }
 });
 
@@ -53,32 +86,6 @@ function ocultarLoader() {
     }
 }
 
-/**
- * Envuelve una función async con el ciclo completo del loader:
- * delay visual → mostrar loader → ejecutar → ocultar loader.
- *
- * Reemplaza este patrón copiado en 4 archivos de página:
- *
- *   await new Promise(r => setTimeout(r, 50));
- *   mostrarLoader();
- *   try {
- *       await fn();
- *   } finally {
- *       ocultarLoader();
- *   }
- *
- * Uso:
- *   await withLoader(async () => {
- *       const data = await getPersonas();
- *       renderLista(data);
- *   });
- *
- * Opcionalmente acepta un callback onError para manejar
- * el error dentro de la página sin perder el ocultarLoader.
- *
- * @param {Function} fn        — función async a ejecutar
- * @param {Function} [onError] — callback(err) opcional
- */
 async function withLoader(fn, onError) {
     await new Promise(r => setTimeout(r, 50));
     mostrarLoader();
@@ -101,7 +108,6 @@ async function withLoader(fn, onError) {
 function marcarLinkActivo(sidebar) {
     const pathname = window.location.pathname;
 
-    // Páginas hijas → sección padre del sidebar
     const padres = {
         'detalle.html': 'personas.html'
     };
@@ -111,7 +117,7 @@ function marcarLinkActivo(sidebar) {
 
     sidebar.querySelectorAll('.Group-a a').forEach(link => {
         link.classList.remove('active');
-        const href      = link.getAttribute('href') || '';
+        const href       = link.getAttribute('href') || '';
         const nombreLink = href.split('/').pop();
         if (nombreLink === objetivo) link.classList.add('active');
     });

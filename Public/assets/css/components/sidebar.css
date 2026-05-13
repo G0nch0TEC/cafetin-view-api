@@ -105,6 +105,9 @@ main.page-content {
 .Group-ul {
     padding: 0 0.75rem;
     flex: 1;
+    min-height: 0;       /* permite que flex child haga scroll */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .Group-a {
@@ -163,4 +166,53 @@ main.page-content {
 
 i[data-lucide] {
     font-style: normal;
+}
+
+.sidebar-footer {
+    padding: 0 0.75rem 1.5rem;  /* ← antes era 0.75rem arriba */
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+.sidebar-footer .sidebar-divider {
+    margin: 0 0.5rem 0.75rem;
+}
+
+.sidebar-logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 0.72rem 1rem;
+    border-radius: 12px;
+    background: transparent;
+    border: none;
+    color: #9b79b4;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    text-align: left;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    /* ← estas dos líneas son el fix */
+    box-sizing: border-box;
+    width: calc(100% - 0px);
+}
+
+.sidebar-logout .icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-logout:hover {
+    background: rgba(220, 60, 60, 0.08);
+    color: #c0392b;
+    transform: translateX(4px);
 }

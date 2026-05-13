@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/helpers/response.php';
-require_once __DIR__ . '/config/database.php';
 
 // Leer la ruta desde el parámetro ?_route=  (estrategia sin mod_rewrite)
 // Ejemplo: /cafetin-view-api/index.php?_route=upload
@@ -22,12 +21,39 @@ if (isset($_GET['_route'])) {
     $raw = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri = preg_replace('#^/cafetin-view-api#', '', $raw);
     $uri = rtrim($uri, '/');
-    // Si apunta a index.php directamente, limpiar
-    $uri = preg_replace('#^/index\.php#', '', $uri);
+    $uri = preg_replace('#^/index\\.php#', '', $uri);
     if ($uri === '') $uri = '/';
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
+
+// ── Auth ──────────────────────────────────────────────
+
+// GET /auth/generar
+if ($method === 'GET' && $uri === '/auth/generar') {
+    require_once __DIR__ . '/auth/AuthController.php';
+    AuthController::generar();
+    exit;
+}
+
+// POST /auth/confirmar  (llamado por la app Android)
+if ($method === 'POST' && $uri === '/auth/confirmar') {
+    require_once __DIR__ . '/auth/AuthController.php';
+    AuthController::confirmar();
+    exit;
+}
+
+// GET /auth/verificar  (polling desde la web)
+if ($method === 'GET' && $uri === '/auth/verificar') {
+    require_once __DIR__ . '/auth/AuthController.php';
+    AuthController::verificar();
+    exit;
+}
+
+// ── Rutas protegidas ──────────────────────────────────
+// A partir de aquí se requiere sesión activa
+
+require_once __DIR__ . '/config/database.php';
 
 // POST /upload
 if ($method === 'POST' && $uri === '/upload') {

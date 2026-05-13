@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceder — Cafetín</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/pages/login.css">
+</head>
+<body>
+
+<div class="login-card">
+
+    <img class="login-logo" src="/cafetin-view-api/Public/assets/image/logo.png" alt="Cafetín">
+    <div class="login-title">Cafetín</div>
+    <p class="login-subtitle">Escanea el código con la app<br>para acceder al dashboard</p>
+
+    <div class="qr-area">
+        <div class="qr-frame">
+            <div class="qr-corner-tr"></div>
+            <div class="qr-corner-bl"></div>
+        </div>
+        <canvas id="qr-canvas" width="172" height="172"></canvas>
+
+        <div class="qr-overlay overlay-cargando" id="overlay-cargando">
+            <div class="spinner"></div>
+            <span>Generando código...</span>
+        </div>
+        <div class="qr-overlay overlay-expirado oculto" id="overlay-expirado">
+            <span>Código expirado</span>
+            <button id="btn-renovar">Renovar</button>
+        </div>
+        <div class="qr-overlay overlay-confirmado oculto" id="overlay-confirmado">
+            <div class="check-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <span>¡Acceso autorizado!</span>
+        </div>
+    </div>
+
+    <div class="timer-wrap"><div id="timer-bar"></div></div>
+
+    <div class="divider"></div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Abre la app <strong>Cafetín</strong> en tu celular</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Toca el ícono <strong>Escanear QR</strong> en la pantalla principal</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Apunta la cámara a este código y espera la confirmación</div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="/cafetin-view-api/Public/assets/js/auth.js"></script>
+</body>
+</html>
