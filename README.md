@@ -112,6 +112,18 @@ Los actores del sistema son:
 
 ---
 
+## 6. Imágenes del Problema
+
+> *(Por agregar)*
+
+---
+
+## 7. Imágenes de la solucion
+
+> *(Por agregar)*
+
+---
+
 ## Tecnologías
 
 | Capa | Tecnología |
