@@ -1,10 +1,15 @@
 <?php
 require_once __DIR__ . '/../helpers/response.php';
+require_once __DIR__ . '/../middleware/auth.php';
 
 class CatalogoController {
     public static function listar(?PDO $db): void {
+
+        require_auth();
+        
         if (!$db) {
             json_response(['error' => 'Base de datos no disponible. La app aún no ha sincronizado.'], 503);
+            return;
         }
 
         // Trae categorías con sus productos anidados
