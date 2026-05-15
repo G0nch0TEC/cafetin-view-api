@@ -79,12 +79,14 @@ function mostrarOverlay(nombre) {
 function dibujarQR(token) {
     const SIZE = 172;
 
+    // Limpiar canvas anterior
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Contenedor temporal fuera de pantalla
     const tmp = document.createElement('div');
-    tmp.style.cssText = 'position:fixed;left:-9999px;opacity:0;pointer-events:none;';
-    document.body.appendChild(tmp); // ← necesario para que QRCode.js renderice
+    tmp.style.cssText = 'position:fixed;left:-9999px;top:-9999px;width:172px;height:172px;';
+    document.body.appendChild(tmp);
 
     new QRCode(tmp, {
         text:         token,
@@ -95,33 +97,46 @@ function dibujarQR(token) {
         correctLevel: QRCode.CorrectLevel.L,
     });
 
-    // QRCode.js 1.0.0 es síncrono, pero usa un requestAnimationFrame
-    // para insertar la imagen — un solo frame es suficiente
-    requestAnimationFrame(() => {
-        const img = tmp.querySelector('img') || tmp.querySelector('canvas');
+    // Intentar obtener el canvas/img generado, con reintentos
+    let intentos = 0;
+    function intentarDibujar() {
+        const qrCanvas = tmp.querySelector('canvas');
+        const qrImg    = tmp.querySelector('img');
 
-        if (!img) {
-            mostrarOverlay('overlay-expirado');
+        if (qrCanvas) {
+            // QRCode generó un canvas — copiar directo
+            ctx.drawImage(qrCanvas, 0, 0, SIZE, SIZE);
+            mostrarOverlay(null);
             document.body.removeChild(tmp);
             return;
         }
 
-        const dibujar = (src) => {
-            const image = new Image();
-            image.onload = () => {
-                ctx.drawImage(image, 0, 0, SIZE, SIZE);
-                mostrarOverlay(null); // quitar overlay de carga
-                document.body.removeChild(tmp); // limpiar
-            };
-            image.src = src;
-        };
-
-        if (img.tagName === 'CANVAS') {
-            dibujar(img.toDataURL());
-        } else {
-            img.complete ? dibujar(img.src) : (img.onload = () => dibujar(img.src));
+        if (qrImg && qrImg.complete && qrImg.naturalWidth > 0) {
+            ctx.drawImage(qrImg, 0, 0, SIZE, SIZE);
+            mostrarOverlay(null);
+            document.body.removeChild(tmp);
+            return;
         }
-    });
+
+        if (qrImg && !qrImg.complete) {
+            qrImg.onload = () => {
+                ctx.drawImage(qrImg, 0, 0, SIZE, SIZE);
+                mostrarOverlay(null);
+                document.body.removeChild(tmp);
+            };
+            return;
+        }
+
+        // Reintentar hasta 20 veces (1 segundo total)
+        if (++intentos < 20) {
+            setTimeout(intentarDibujar, 50);
+        } else {
+            mostrarOverlay('overlay-expirado');
+            document.body.removeChild(tmp);
+        }
+    }
+
+    setTimeout(intentarDibujar, 50);
 }
 
 // ── Timer bar ─────────────────────────────────────────
