@@ -214,5 +214,12 @@ async function iniciar() {
     }
 }
 
-// Arrancar al cargar la página
-iniciar();
+// Arrancar al cargar la página — esperar que QRCode.js esté listo
+function arrancar() {
+    if (typeof QRCode !== 'undefined') {
+        iniciar();
+    } else {
+        setTimeout(arrancar, 50);
+    }
+}
+arrancar();
