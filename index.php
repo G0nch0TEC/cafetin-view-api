@@ -1,4 +1,12 @@
 <?php
+// ── Redirección raíz → login ──────────────────────────
+$rawUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$rawUri = rtrim($rawUri, '/');
+if ($rawUri === '' || $rawUri === '/') {
+    header('Location: /Public/login.html', true, 302);
+    exit;
+}
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
