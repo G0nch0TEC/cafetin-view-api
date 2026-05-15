@@ -10,14 +10,43 @@
 const API_BASE = 'http://localhost/cafetin-view-api';
 
 
+// ── Sesión ────────────────────────────────────────────
+
+/**
+ * Devuelve la clave de sesión guardada en localStorage,
+ * o null si no hay sesión activa.
+ */
+function _getSesion() {
+    try {
+        const raw = localStorage.getItem('cafetin_sesion');
+        if (!raw) return null;
+        const { sesion, expiresAt } = JSON.parse(raw);
+        return Date.now() < expiresAt ? sesion : null;
+    } catch {
+        return null;
+    }
+}
+
+
 // ── Fetch base ────────────────────────────────────────
 
 /**
  * Wrapper interno. Lanza un Error con mensaje legible
  * si la respuesta no es 2xx o si el JSON trae { error }.
+ * Incluye automáticamente el header Authorization.
  */
 async function _get(endpoint) {
-    const res = await fetch(API_BASE + endpoint);
+    const sesion = _getSesion();
+    const res = await fetch(API_BASE + endpoint, {
+        headers: sesion ? { 'Authorization': sesion } : {}
+    });
+
+    if (res.status === 401) {
+        // Sesión expirada o inválida — redirigir al login
+        localStorage.removeItem('cafetin_sesion');
+        window.location.replace('/cafetin-view-api/Public/login.html');
+        return;
+    }
 
     if (!res.ok) {
         const body = await res.json().catch(() => ({}));

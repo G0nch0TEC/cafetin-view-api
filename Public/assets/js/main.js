@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .sort((a, b) => Number(b.saldo) - Number(a.saldo))
                 .slice(0, 4);
             renderDeudores(deudores);
+            renderDonaDeuda(personas);
+
+            // Actualizar total central de la dona
+            const totalEl = document.getElementById('dona-total');
+            if (totalEl) totalEl.textContent = formatearMonto(deudaTotal);
+
             renderFrescura();
         },
         (err) => {

@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -52,6 +52,9 @@ if ($method === 'GET' && $uri === '/auth/verificar') {
 
 // ── Rutas protegidas ──────────────────────────────────
 // A partir de aquí se requiere sesión activa
+
+require_once __DIR__ . '/middleware/auth.php';
+require_auth();
 
 require_once __DIR__ . '/config/database.php';
 

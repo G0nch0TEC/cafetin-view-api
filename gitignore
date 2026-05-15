@@ -1,0 +1,13 @@
+# Archivos de datos generados en runtime — NO versionar
+data/auth_tokens.json
+data/cafetin_db
+data/cafetin_db-wal
+data/cafetin_db-shm
+
+# Entorno local
+.env
+local.properties
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

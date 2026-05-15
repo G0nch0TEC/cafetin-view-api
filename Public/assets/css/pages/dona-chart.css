@@ -1,0 +1,95 @@
+/* ══════════════════════════════
+   GRÁFICO DE DONA — deuda
+══════════════════════════════ */
+.dona-panel .panel-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-divider);
+}
+
+#dona-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 1.1rem 1.25rem;
+}
+
+.dona-canvas-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+}
+
+.dona-canvas-wrap canvas {
+    display: block;
+}
+
+/* Texto central sobre la dona */
+.dona-centro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.dona-centro-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.dona-centro-valor {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-title);
+    line-height: 1.2;
+}
+
+/* Leyenda */
+#dona-leyenda {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dona-leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.dona-leyenda-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.dona-leyenda-nombre {
+    flex: 1;
+    color: var(--color-text-body);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dona-leyenda-pct {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+}
+
+.dona-vacio {
+    padding: 1rem;
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    text-align: center;
+}

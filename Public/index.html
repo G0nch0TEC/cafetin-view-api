@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>DashBoard — Inicio</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="assets/css/pages/dona-chart.css">
 </head>
 <body>
     <div id="sidebar-container"></div>
@@ -143,6 +145,23 @@
             <div class="deudores-lista" id="deudores-lista"></div>
             </div>
 
+
+            <div class="panel dona-panel">
+                <div class="panel-header">
+                    <h2 class="panel-titulo">Distribución de deuda</h2>
+                </div>
+                <div id="dona-wrap">
+                    <div class="dona-canvas-wrap">
+                        <canvas id="dona-deuda"></canvas>
+                        <div class="dona-centro">
+                            <span class="dona-centro-label">Total</span>
+                            <span class="dona-centro-valor" id="dona-total">—</span>
+                        </div>
+                    </div>
+                    <div id="dona-leyenda"></div>
+                </div>
+            </div>
+
             <div class="accesos-grid">
             <a href="pages/personas.html" class="acceso-card">
                 <i data-lucide="users"></i>
@@ -165,6 +184,7 @@
     <script src="assets/js/service/api.js"></script>
     <script src="assets/js/helper/init.js"></script>
     <script src="assets/js/helper/utils.js"></script>
+    <script src="assets/js/pages/dona-chart.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

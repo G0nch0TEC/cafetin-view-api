@@ -23,7 +23,7 @@ class AuthController {
 
     // ── Helpers de almacenamiento ─────────────────────
 
-    private static function leer(): array {
+    public static function leer(): array {
         if (!file_exists(self::$archivoTokens)) return [];
         return json_decode(file_get_contents(self::$archivoTokens), true) ?? [];
     }
