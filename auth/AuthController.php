@@ -16,7 +16,7 @@ require_once __DIR__ . '/../helpers/response.php';
  */
 class AuthController {
 
-    private static string $archivoTokens  = __DIR__ . '/../data/auth_tokens.json';
+    private static string $archivoTokens  = '/tmp/auth_tokens.json';
     private const TOKEN_TTL    = 300;       // 5 minutos para escanear
     private const SESION_TTL   = 86400;     // 24 horas de sesión web
 
