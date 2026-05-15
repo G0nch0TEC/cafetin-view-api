@@ -22,8 +22,8 @@ class UploadController {
             ], 400);
         }
 
-        // Guardar en /tmp (escribible en Railway)
-        $destino = '/tmp/cafetin_db';
+        // Guardar en data/ (carpeta del proyecto)
+        $destino = __DIR__ . '/../data/cafetin_db';
 
         if (file_exists($destino)) {
             unlink($destino);

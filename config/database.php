@@ -1,6 +1,6 @@
 <?php
 function getDB(): ?PDO {
-    $path = '/tmp/cafetin_db';
+    $path = __DIR__ . '/../data/cafetin_db';
     if (!file_exists($path)) return null;
 
     $pdo = new PDO('sqlite:' . $path);
