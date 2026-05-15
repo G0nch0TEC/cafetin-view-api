@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('/cafetin-view-api/Public/assets/image/background.jpg') center/cover no-repeat fixed;
+            background: url('/Public/assets/image/background.jpg') center/cover no-repeat fixed;
             color: var(--color-text-title);
             padding: 24px;
         }

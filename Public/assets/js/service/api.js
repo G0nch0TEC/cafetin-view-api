@@ -7,7 +7,7 @@
 //  CONFIGURACIÓN
 //  Cambia solo esta línea cuando el servidor cambie.
 // ─────────────────────────────────────────────────────
-const API_BASE = 'http://localhost/cafetin-view-api';
+const API_BASE = 'https://cafetin-view-api-production.up.railway.app';
 
 
 // ── Sesión ────────────────────────────────────────────
@@ -44,7 +44,7 @@ async function _get(endpoint) {
     if (res.status === 401) {
         // Sesión expirada o inválida — redirigir al login
         localStorage.removeItem('cafetin_sesion');
-        window.location.replace('/cafetin-view-api/Public/login.html');
+        window.location.replace('/Public/login.html');
         return;
     }
 

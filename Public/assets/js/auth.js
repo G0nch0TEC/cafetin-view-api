@@ -3,7 +3,7 @@
 //  Maneja: generar QR, polling, sesión en localStorage
 // ══════════════════════════════════════════════════════
 
-const API_BASE      = 'http://192.168.18.22/cafetin-view-api/index.php';
+const API_BASE      = 'https://cafetin-view-api-production.up.railway.app/index.php';
 const SESION_KEY    = 'cafetin_sesion';
 const POLL_INTERVAL = 2000;   // ms entre cada verificación
 const TOKEN_TTL     = 300;    // segundos (debe coincidir con PHP)
@@ -59,7 +59,7 @@ function sesionActiva() {
  */
 function cerrarSesion() {
     localStorage.removeItem(SESION_KEY);
-    window.location.href = '/cafetin-view-api/Public/login.html';
+    window.location.href = '/Public/login.html';
 }
 
 // Exponer para init.js y sidebar
@@ -165,7 +165,7 @@ function iniciarPolling(token) {
 
                 // Redirigir al dashboard tras 1 segundo
                 setTimeout(() => {
-                    window.location.href = '/cafetin-view-api/Public/index.html';
+                    window.location.href = '/Public/index.html';
                 }, 1000);
 
             } else if (data.status === 'expirado' || data.status === 'invalido') {

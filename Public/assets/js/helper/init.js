@@ -16,18 +16,18 @@
 
     const raw = localStorage.getItem(SESION_KEY);
     if (!raw) {
-        window.location.replace('/cafetin-view-api/Public/login.html');
+        window.location.replace('/Public/login.html');
         return;
     }
     try {
         const { expiresAt } = JSON.parse(raw);
         if (Date.now() >= expiresAt) {
             localStorage.removeItem(SESION_KEY);
-            window.location.replace('/cafetin-view-api/Public/login.html');
+            window.location.replace('/Public/login.html');
         }
     } catch {
         localStorage.removeItem(SESION_KEY);
-        window.location.replace('/cafetin-view-api/Public/login.html');
+        window.location.replace('/Public/login.html');
     }
 })();
 
@@ -35,8 +35,8 @@
 // ── Componentes globales ──────────────────────────────
 
 const components = [
-    { id: 'sidebar-container', path: '/cafetin-view-api/Public/components/sidebar.html' },
-    { id: 'loader-container',  path: '/cafetin-view-api/Public/components/loader.html'  },
+    { id: 'sidebar-container', path: '/Public/components/sidebar.html' },
+    { id: 'loader-container',  path: '/Public/components/loader.html'  },
 ];
 
 components.forEach(async ({ id, path }) => {
@@ -53,7 +53,7 @@ components.forEach(async ({ id, path }) => {
 
         const toggle = el.querySelector('.sidebar-toggle');
         if (toggle) toggle.addEventListener('click', () => {
-            window.location.href = '/cafetin-view-api/Public/index.html';
+            window.location.href = '/Public/index.html';
         });
 
         // Botón cerrar sesión en el sidebar
@@ -61,7 +61,7 @@ components.forEach(async ({ id, path }) => {
         if (btnSalir) {
             btnSalir.addEventListener('click', () => {
                 localStorage.removeItem('cafetin_sesion');
-                window.location.href = '/cafetin-view-api/Public/login.html';
+                window.location.href = '/Public/login.html';
             });
         }
     }
