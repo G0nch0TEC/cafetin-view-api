@@ -22,30 +22,19 @@ class UploadController {
             ], 400);
         }
 
-        $destino = __DIR__ . '/../data/cafetin_db';
+        // Guardar en /tmp (escribible en Railway)
+        $destino = '/tmp/cafetin_db';
 
-        if (!is_dir(dirname($destino))) {
-            mkdir(dirname($destino), 0755, true);
-        }
-
-        // IMPORTANTE:
-        // borrar DB vieja antes de mover la nueva
         if (file_exists($destino)) {
             unlink($destino);
         }
 
         if (move_uploaded_file($tmp, $destino)) {
-
             clearstatcache();
-
-            json_response([
-                'mensaje' => 'Base de datos sincronizada correctamente'
-            ]);
-
+            json_response(['mensaje' => 'Base de datos sincronizada correctamente']);
         } else {
-
             json_response([
-                'error' => 'No se pudo guardar el archivo',
+                'error'   => 'No se pudo guardar el archivo',
                 'detalle' => error_get_last()
             ], 500);
         }

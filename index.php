@@ -98,20 +98,29 @@ if ($method === 'GET' && $uri === '/auth/verificar') {
     exit;
 }
 
-// ── Rutas protegidas ──────────────────────────────────
-// A partir de aquí se requiere sesión activa
-
-require_once __DIR__ . '/middleware/auth.php';
-require_auth();
-
-require_once __DIR__ . '/config/database.php';
-
-// POST /upload
+// ── POST /upload — protegido por X-Api-Key ───────────
+// La app Android usa este endpoint para sincronizar el SQLite.
+// No usa sesión web sino una clave de API fija.
 if ($method === 'POST' && $uri === '/upload') {
+    $headers   = getallheaders();
+    $apiKey    = $headers['X-Api-Key'] ?? $headers['x-api-key'] ?? '';
+    $esperada  = getenv('UPLOAD_API_KEY') ?: '';
+
+    if (!$esperada || $apiKey !== $esperada) {
+        json_response(['error' => 'No autorizado'], 401);
+        exit;
+    }
+
     require_once __DIR__ . '/upload/UploadController.php';
     UploadController::recibir();
     exit;
 }
+
+// ── Rutas protegidas por sesión web ───────────────────
+require_once __DIR__ . '/middleware/auth.php';
+require_auth();
+
+require_once __DIR__ . '/config/database.php';
 
 // GET /personas
 if ($method === 'GET' && $uri === '/personas') {
