@@ -36,6 +36,7 @@ if (in_array($ext, $staticExts, true)) {
     }
 }
 
+
 // ── Bypass páginas HTML públicas ──────────────────────
 if ($ext === 'html') {
     $file = __DIR__ . $rawUri;
