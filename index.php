@@ -37,6 +37,13 @@ if (in_array($ext, $staticExts, true)) {
 }
 
 
+// ── Favicon — responder vacío para evitar 401 ───────────
+if ($rawUri === '/favicon.ico') {
+    header('Content-Type: image/x-icon');
+    http_response_code(204);
+    exit;
+}
+
 // ── Bypass páginas HTML públicas ──────────────────────
 if ($ext === 'html') {
     $file = __DIR__ . $rawUri;
