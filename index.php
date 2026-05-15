@@ -7,6 +7,45 @@ if ($rawUri === '' || $rawUri === '/') {
     exit;
 }
 
+// ── Bypass archivos estáticos ─────────────────────────
+// FrankenPHP enruta todo por index.php — dejar pasar
+// imágenes, CSS, JS, fuentes y favicon sin autenticación
+$ext = strtolower(pathinfo($rawUri, PATHINFO_EXTENSION));
+$staticExts = ['css','js','png','jpg','jpeg','gif','svg','ico','woff','woff2','ttf','webp','map'];
+if (in_array($ext, $staticExts, true)) {
+    $file = __DIR__ . $rawUri;
+    if (is_file($file)) {
+        $mime = [
+            'css'  => 'text/css',
+            'js'   => 'application/javascript',
+            'png'  => 'image/png',
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif'  => 'image/gif',
+            'svg'  => 'image/svg+xml',
+            'ico'  => 'image/x-icon',
+            'woff' => 'font/woff',
+            'woff2'=> 'font/woff2',
+            'ttf'  => 'font/ttf',
+            'webp' => 'image/webp',
+            'map'  => 'application/json',
+        ];
+        header('Content-Type: ' . ($mime[$ext] ?? 'application/octet-stream'));
+        readfile($file);
+        exit;
+    }
+}
+
+// ── Bypass páginas HTML públicas ──────────────────────
+if ($ext === 'html') {
+    $file = __DIR__ . $rawUri;
+    if (is_file($file)) {
+        header('Content-Type: text/html; charset=utf-8');
+        readfile($file);
+        exit;
+    }
+}
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
