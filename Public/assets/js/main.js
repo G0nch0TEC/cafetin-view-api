@@ -412,8 +412,14 @@ function renderRanking(movimientosHoy) {
     const conNota  = movimientosHoy.filter(m => m.tipo === 'FIADO' && m.nota && m.nota.trim());
     if (!conNota.length) { lista.innerHTML = '<p class="ranking-vacio">Sin productos registrados hoy</p>'; return; }
 
-    const conteo   = {};
-    conNota.forEach(m => { const c = m.nota.trim().toLowerCase(); conteo[c] = (conteo[c] || 0) + 1; });
+    const _rx     = /^(.+?)\s+x(\d+)$/i;
+    const conteo  = {};
+    conNota.forEach(m => {
+        const match    = m.nota.trim().match(_rx);
+        const clave    = match ? match[1].trim().toLowerCase() : m.nota.trim().toLowerCase();
+        const cantidad = match ? parseInt(match[2], 10) : 1;
+        conteo[clave]  = (conteo[clave] || 0) + cantidad;
+    });
 
     const ranking  = Object.entries(conteo).sort((a, b) => b[1] - a[1]).slice(0, 5);
     const maxCount = ranking[0][1];
