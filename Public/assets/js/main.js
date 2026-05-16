@@ -57,12 +57,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 function _renderDashboard(todos, personas) {
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
+    const hoyInicio = hoy.getTime();
+    const hoyFin    = hoyInicio + 86399999; // 23:59:59.999
 
-    const movimientosHoy = todos.filter(m => {
-        const fecha = new Date(m.fecha);
-        fecha.setHours(0, 0, 0, 0);
-        return fecha.getTime() === hoy.getTime();
-    });
+    const movimientosHoy = todos.filter(m => m.fecha >= hoyInicio && m.fecha <= hoyFin);
 
     const datosSemana   = calcularDatosDias(todos, 7);
     const deudaTotal    = personas.reduce((acc, p) => acc + Math.max(0, Number(p.saldo)), 0);
@@ -72,7 +70,7 @@ function _renderDashboard(todos, personas) {
 
     renderMetricas({ deudaTotal, cobradoHoy, fiadoHoy, totalPersonas, movimientosHoy });
     renderInsights({ todos, personas, movimientosHoy, cobradoHoy, fiadoHoy, deudaTotal });
-    renderUltimosMovimientos(movimientosHoy.slice(0, 5));
+    renderUltimosMovimientos(movimientosHoy);
     renderRanking(movimientosHoy);
     renderSparklines(datosSemana, movimientosHoy, personas);
     renderGrafico7Dias(datosSemana);
@@ -292,12 +290,18 @@ function renderInsights({ todos, personas, movimientosHoy, cobradoHoy, fiadoHoy,
         ? Math.round(((cobradoSemana - cobradoSemAnt) / cobradoSemAnt) * 100)
         : null;
 
-    // Top producto del día
-    const notasHoy = movimientosHoy.filter(m => m.tipo === 'FIADO' && m.nota && m.nota.trim()).map(m => m.nota.trim().toLowerCase());
+    // Top producto del día — mismo regex que catalogo.js para sumar cantidades
+    const _regexProd = /^(.+?)\s+x(\d+)$/i;
     let topProducto = null, topCount = 0;
-    if (notasHoy.length) {
-        const conteo  = {};
-        notasHoy.forEach(n => { conteo[n] = (conteo[n] || 0) + 1; });
+    const _movsFiadoHoy = movimientosHoy.filter(m => m.tipo === 'FIADO' && m.nota && m.nota.trim());
+    if (_movsFiadoHoy.length) {
+        const conteo = {};
+        _movsFiadoHoy.forEach(m => {
+            const match    = m.nota.trim().match(_regexProd);
+            const clave    = match ? match[1].trim().toLowerCase() : m.nota.trim().toLowerCase();
+            const cantidad = match ? parseInt(match[2], 10) : 1;
+            conteo[clave]  = (conteo[clave] || 0) + cantidad;
+        });
         const entrada = Object.entries(conteo).sort((a, b) => b[1] - a[1])[0];
         if (entrada) { topProducto = entrada[0].charAt(0).toUpperCase() + entrada[0].slice(1); topCount = entrada[1]; }
     }
