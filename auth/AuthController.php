@@ -55,10 +55,14 @@ class AuthController {
             return;
         }
 
+        $body     = json_decode(file_get_contents('php://input'), true) ?? [];
+        $deviceId = trim($body['deviceId'] ?? '');
+
         $sesion = bin2hex(random_bytes(24));
         $tokens[$token]['status']         = 'confirmado';
         $tokens[$token]['sesion']         = $sesion;
         $tokens[$token]['sesion_expires'] = time() + self::SESION_TTL;
+        $tokens[$token]['device_id']      = $deviceId;
 
         self::guardar($tokens);
         json_response(['ok' => true]);

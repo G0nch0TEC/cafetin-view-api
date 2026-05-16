@@ -5,6 +5,14 @@ class UploadController {
 
     public static function recibir(): void {
 
+        // Identificar dispositivo
+        $headers  = getallheaders();
+        $deviceId = preg_replace('/[^a-zA-Z0-9]/', '', $headers['X-Device-Id'] ?? '');
+        if (!$deviceId) {
+            json_response(['error' => 'Device ID requerido'], 400);
+            return;
+        }
+
         // Leer JSON del body
         $raw = file_get_contents('php://input');
         if (!$raw) {
@@ -23,7 +31,7 @@ class UploadController {
         $categorias  = $data['categorias']  ?? [];
         $productos   = $data['productos']   ?? [];
 
-        $destino = __DIR__ . '/../data/cafetin_db';
+        $destino = __DIR__ . '/../data/cafetin_db_' . $deviceId;
 
         try {
             $pdo = new PDO('sqlite:' . $destino);
@@ -31,7 +39,6 @@ class UploadController {
             $pdo->exec('PRAGMA journal_mode = WAL');
             $pdo->exec('PRAGMA foreign_keys = OFF');
 
-            // Crear tablas si no existen
             $pdo->exec("
                 CREATE TABLE IF NOT EXISTS personas (
                     id           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,13 +74,11 @@ class UploadController {
 
             $pdo->beginTransaction();
 
-            // Limpiar y reemplazar datos
             $pdo->exec("DELETE FROM movimientos");
             $pdo->exec("DELETE FROM personas");
             $pdo->exec("DELETE FROM catalogo_productos");
             $pdo->exec("DELETE FROM catalogo_categorias");
 
-            // Insertar personas
             $stmtP = $pdo->prepare("
                 INSERT INTO personas (id, nombre, descripcion, enviadoHasta)
                 VALUES (:id, :nombre, :descripcion, :enviadoHasta)
@@ -87,7 +92,6 @@ class UploadController {
                 ]);
             }
 
-            // Insertar movimientos
             $stmtM = $pdo->prepare("
                 INSERT INTO movimientos (id, personaId, tipo, monto, fecha, nota)
                 VALUES (:id, :personaId, :tipo, :monto, :fecha, :nota)
@@ -103,7 +107,6 @@ class UploadController {
                 ]);
             }
 
-            // Insertar categorías
             $stmtC = $pdo->prepare("
                 INSERT INTO catalogo_categorias (id, nombre, emoji, orden)
                 VALUES (:id, :nombre, :emoji, :orden)
@@ -117,7 +120,6 @@ class UploadController {
                 ]);
             }
 
-            // Insertar productos
             $stmtPr = $pdo->prepare("
                 INSERT INTO catalogo_productos (id, categoriaId, nombre, montoCentavos, orden)
                 VALUES (:id, :categoriaId, :nombre, :montoCentavos, :orden)
@@ -144,9 +146,7 @@ class UploadController {
             ]);
 
         } catch (Exception $e) {
-            if (isset($pdo) && $pdo->inTransaction()) {
-                $pdo->rollBack();
-            }
+            if (isset($pdo) && $pdo->inTransaction()) $pdo->rollBack();
             json_response(['error' => 'Error al guardar: ' . $e->getMessage()], 500);
         }
     }
