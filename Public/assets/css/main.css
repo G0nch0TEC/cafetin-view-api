@@ -650,3 +650,40 @@
 .deudores-lista::-webkit-scrollbar-thumb:hover {
     background: rgba(168,85,247,0.5);
 }
+
+/* ══════════════════════════════
+   LIVE POLL — pulso al sincronizar
+══════════════════════════════ */
+
+@keyframes sync-entrada {
+    0%   { opacity: 0.5; transform: translateY(3px); }
+    100% { opacity: 1;   transform: translateY(0);   }
+}
+
+.data-freshness.sync-pulso {
+    animation: sync-entrada 0.3s ease-out;
+}
+
+/* El texto vira a verde durante la animación */
+.data-freshness.sync-pulso #freshness-text {
+    color: var(--color-success, #22c55e);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+/* Punto pulsante que aparece en el indicador mientras hay polling activo */
+.live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-success, #22c55e);
+    margin-left: 2px;
+    flex-shrink: 0;
+    animation: dot-respirar 2.4s ease-in-out infinite;
+}
+
+@keyframes dot-respirar {
+    0%, 100% { opacity: 1;   transform: scale(1);    }
+    50%       { opacity: 0.3; transform: scale(0.65); }
+}

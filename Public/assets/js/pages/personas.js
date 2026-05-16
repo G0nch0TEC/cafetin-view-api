@@ -61,6 +61,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
         (err) => mostrarError('#persona-lista', 'No se pudieron cargar las personas', err.message)
     );
+
+    // ── Polling silencioso — se actualizan los datos sin recargar ─────────────────
+    iniciarPolling({
+        fetchFn: async () => {
+            const [personas, todosMovs] = await Promise.all([
+                getPersonas(),
+                getTodosLosMovimientos()
+            ]);
+            return { personas, todosMovs };
+        },
+        firmaFn: ({ personas }) => {
+            const deuda = personas.reduce((s, p) => s + Number(p.saldo), 0);
+            return `${personas.length}:${deuda}`;
+        },
+        renderFn: ({ personas, todosMovs }) => {
+            _personasConMeta = enriquecerPersonas(personas, todosMovs);
+            renderResumen(_personasConMeta);
+            // Respetar búsqueda y filtros activos del usuario
+            const busqueda = document.getElementById('buscador')?.value.toLowerCase() ?? '';
+            renderPersonas(_personasConMeta, busqueda);
+        },
+        intervalo: 30_000
+    });
 });
 
 

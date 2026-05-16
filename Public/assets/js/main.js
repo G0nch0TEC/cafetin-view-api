@@ -20,54 +20,73 @@ document.addEventListener('DOMContentLoaded', async () => {
                 getTodosLosMovimientos(),
                 getPersonas()
             ]);
-
-            const hoy = new Date();
-            hoy.setHours(0, 0, 0, 0);
-
-            const movimientosHoy = todos.filter(m => {
-                const fecha = new Date(m.fecha);
-                fecha.setHours(0, 0, 0, 0);
-                return fecha.getTime() === hoy.getTime();
-            });
-
-            // Datos de los últimos 7 días — usa calcularDatosDias() de utils
-            const datosSemana = calcularDatosDias(todos, 7);
-
-            // Métricas
-            const deudaTotal    = personas.reduce((acc, p) => acc + Math.max(0, Number(p.saldo)), 0);
-            const cobradoHoy    = movimientosHoy.filter(m => m.tipo === 'PAGO').reduce((s, m) => s + Number(m.monto), 0);
-            const fiadoHoy      = movimientosHoy.filter(m => m.tipo === 'FIADO').reduce((s, m) => s + Number(m.monto), 0);
-            const totalPersonas = personas.length;
-
-            renderMetricas({ deudaTotal, cobradoHoy, fiadoHoy, totalPersonas, movimientosHoy });
-            renderInsights({ todos, personas, movimientosHoy, cobradoHoy, fiadoHoy, deudaTotal });
-            renderUltimosMovimientos(movimientosHoy.slice(0, 5));
-            renderRanking(movimientosHoy);
-            renderSparklines(datosSemana, movimientosHoy, personas);
-            renderGrafico7Dias(datosSemana);
-
-            const deudores = [...personas]
-                .filter(p => Number(p.saldo) > 0)
-                .sort((a, b) => Number(b.saldo) - Number(a.saldo))
-                .slice(0, 4);
-            renderDeudores(deudores);
-            renderDonaDeuda(personas);
-
-            // Actualizar total central de la dona
-            const totalEl = document.getElementById('dona-total');
-            if (totalEl) totalEl.textContent = formatearMonto(deudaTotal);
-
+            _renderDashboard(todos, personas);
             renderFrescura();
         },
         (err) => {
             console.error('Error cargando el dashboard:', err.message);
-            const movLista    = document.getElementById('mov-lista');
+            const movLista      = document.getElementById('mov-lista');
             const deudoresLista = document.getElementById('deudores-lista');
-            if (movLista)      movLista.innerHTML     = '<p class="mov-nota" style="padding:1rem">No se pudo conectar con la API</p>';
-            if (deudoresLista) deudoresLista.innerHTML = '<p class="mov-nota" style="padding:1rem">Sin datos disponibles</p>';
+            if (movLista)       movLista.innerHTML      = '<p class="mov-nota" style="padding:1rem">No se pudo conectar con la API</p>';
+            if (deudoresLista)  deudoresLista.innerHTML = '<p class="mov-nota" style="padding:1rem">Sin datos disponibles</p>';
         }
     );
+
+    // ── Polling silencioso — detecta cambios y re-renderiza sin recargar ──
+    iniciarPolling({
+        fetchFn:  async () => {
+            const [todos, personas] = await Promise.all([
+                getTodosLosMovimientos(),
+                getPersonas()
+            ]);
+            return { todos, personas };
+        },
+        firmaFn:  ({ todos, personas }) => {
+            // La firma cambia si hay nuevos movimientos o cambia la deuda total
+            const deuda = personas.reduce((s, p) => s + Number(p.saldo), 0);
+            return `${todos.length}:${deuda}`;
+        },
+        renderFn: ({ todos, personas }) => _renderDashboard(todos, personas),
+        intervalo:   30_000,
+        indicadorId: 'data-freshness'
+    });
 });
+
+
+// ── Render completo del dashboard (carga inicial + polling) ─────────────────────
+function _renderDashboard(todos, personas) {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const movimientosHoy = todos.filter(m => {
+        const fecha = new Date(m.fecha);
+        fecha.setHours(0, 0, 0, 0);
+        return fecha.getTime() === hoy.getTime();
+    });
+
+    const datosSemana   = calcularDatosDias(todos, 7);
+    const deudaTotal    = personas.reduce((acc, p) => acc + Math.max(0, Number(p.saldo)), 0);
+    const cobradoHoy    = movimientosHoy.filter(m => m.tipo === 'PAGO').reduce((s, m) => s + Number(m.monto), 0);
+    const fiadoHoy      = movimientosHoy.filter(m => m.tipo === 'FIADO').reduce((s, m) => s + Number(m.monto), 0);
+    const totalPersonas = personas.length;
+
+    renderMetricas({ deudaTotal, cobradoHoy, fiadoHoy, totalPersonas, movimientosHoy });
+    renderInsights({ todos, personas, movimientosHoy, cobradoHoy, fiadoHoy, deudaTotal });
+    renderUltimosMovimientos(movimientosHoy.slice(0, 5));
+    renderRanking(movimientosHoy);
+    renderSparklines(datosSemana, movimientosHoy, personas);
+    renderGrafico7Dias(datosSemana);
+
+    const deudores = [...personas]
+        .filter(p => Number(p.saldo) > 0)
+        .sort((a, b) => Number(b.saldo) - Number(a.saldo))
+        .slice(0, 4);
+    renderDeudores(deudores);
+    renderDonaDeuda(personas);
+
+    const totalEl = document.getElementById('dona-total');
+    if (totalEl) totalEl.textContent = formatearMonto(deudaTotal);
+}
 
 
 // ── Saludo dinámico ───────────────────────────────────
