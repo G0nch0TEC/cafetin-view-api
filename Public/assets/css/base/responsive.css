@@ -1,0 +1,337 @@
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — Tablet y Móvil
+   Public/assets/css/base/responsive.css
+
+   Breakpoints:
+     Tablet  : max-width 1024px
+     Móvil   : max-width  640px
+
+   Incluir DESPUÉS de todos los demás CSS en cada página.
+══════════════════════════════════════════════════════ */
+
+
+/* ══════════════════════════════════════════════════════
+   OVERLAY — capa oscura detrás del sidebar en móvil
+══════════════════════════════════════════════════════ */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 10, 50, 0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.sidebar-overlay.visible {
+    opacity: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   BOTÓN HAMBURGUESA — solo visible en móvil/tablet
+══════════════════════════════════════════════════════ */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(160, 100, 200, 0.15);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    color: #5b3b6e;
+    transition: background 0.2s, transform 0.15s;
+}
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+.menu-toggle i {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   TABLET  (≤ 1024px)
+══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+    /* ── Sidebar: se oculta fuera de pantalla ── */
+    #sidebar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        min-width: 260px;
+        width: 260px;
+    }
+
+    #sidebar-container.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: block;
+    }
+
+    /* ── Botón hamburguesa visible ── */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* ── El contenido principal ocupa toda la pantalla ── */
+    body {
+        overflow: hidden auto !important;
+    }
+
+    main.page-content {
+        width: 100%;
+        padding: 2rem 1.25rem 1.25rem;
+        padding-top: 4rem; /* espacio para el botón hamburguesa */
+    }
+
+    /* ── Dashboard: métricas en 2 columnas ── */
+    .metricas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ── Dashboard: bottom-grid en columna ── */
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ── Historial: resumen en 2 columnas ── */
+    .resumen-dia {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ── Accesos rápidos en 3 col (ya están bien) ── */
+    .accesos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* ── Tabla horizontal con scroll ── */
+    .tabla-wrapper,
+    .tabla-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   MÓVIL  (≤ 640px)
+══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+    /* ── Espaciado general más compacto ── */
+    main.page-content {
+        padding: 3.75rem 0.875rem 1rem;
+        gap: 0.875rem;
+    }
+
+    /* ── Títulos ── */
+    .page-title {
+        font-size: 1.15rem;
+    }
+    .page-subtitle {
+        font-size: 12px;
+    }
+
+    /* ── Dashboard: métricas en 1 columna ── */
+    .metricas-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    /* Ocultar sparkline en móvil para ganar espacio */
+    .metrica-spark {
+        display: none;
+    }
+
+    /* ── Dashboard: bottom-grid en columna (ya heredado) ── */
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ── Historial: resumen en 2 col pequeñas ── */
+    .resumen-dia {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .resumen-card {
+        padding: 0.75rem 1rem;
+    }
+
+    .resumen-valor {
+        font-size: 16px;
+    }
+
+    /* ── Gráfico de semana más bajo en móvil ── */
+    .semana-chart-wrap {
+        padding: 10px 10px 0;
+    }
+
+    .semana-chart {
+        height: 60px;
+    }
+
+    /* ── Accesos rápidos: 3 col con texto más pequeño ── */
+    .accesos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .acceso-card {
+        padding: 0.75rem 0.5rem;
+        font-size: 11px;
+        gap: 6px;
+    }
+
+    .acceso-card i {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* ── Catálogo: grid de 2 columnas ── */
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    /* ── Tabs de catálogo: scroll horizontal ── */
+    .tabs-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+    .tabs-container::-webkit-scrollbar { display: none; }
+
+    .tab {
+        flex-shrink: 0;
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    /* ── Toolbar de personas / historial ── */
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar .input-search,
+    .toolbar input[type="text"],
+    .toolbar input[type="search"] {
+        width: 100%;
+    }
+
+    .filtros {
+        justify-content: flex-start;
+    }
+
+    /* ── Filas de persona más compactas ── */
+    .persona-row {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+
+    .persona-nombre {
+        font-size: 13px;
+    }
+
+    /* ── Tabla: scroll horizontal ── */
+    .tabla-wrapper,
+    .tabla-scroll,
+    .tabla-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── Detalle persona: header en columna ── */
+    .persona-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .persona-header .saldo-badge,
+    .persona-header .persona-acciones {
+        align-self: flex-start;
+    }
+
+    /* ── Formularios ── */
+    .form-row {
+        flex-direction: column;
+    }
+
+    /* ── Page header: título + acciones en columna ── */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+    }
+
+    /* ── Paneles: padding más ajustado ── */
+    .panel-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .catalogo-wrapper {
+        padding: 1rem;
+    }
+
+    /* ── Métricas card más compactas ── */
+    .metrica-card {
+        padding: 0.85rem 1rem;
+        gap: 12px;
+    }
+
+    .metrica-valor {
+        font-size: 18px;
+    }
+
+    .metrica-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* ── Insights slider ── */
+    .insights-slider {
+        min-height: 0;
+    }
+
+    /* ── Login: padding reducido ── */
+    .login-card {
+        padding: 28px 20px 24px;
+        max-width: 100%;
+    }
+
+    /* ── Date nav en historial ── */
+    .date-nav {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    /* ── Ocultar columnas opcionales en tabla en móvil ── */
+    .col-hide-mobile {
+        display: none;
+    }
+}
