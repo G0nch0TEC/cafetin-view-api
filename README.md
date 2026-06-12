@@ -131,21 +131,9 @@ Los actores del sistema son:
 
 ---
 
-## 5. Imágenes del Negocio
+## 5. Uso del Software en el Negocio
 
-> *(Por agregar)*
-
----
-
-## 6. Imágenes del Problema
-
-> *(Por agregar)*
-
----
-
-## 7. Imágenes de la Solución
-
-> *(Por agregar)*
+> ![Captura de pantalla](./images/software.jpeg)
 
 ---
 
