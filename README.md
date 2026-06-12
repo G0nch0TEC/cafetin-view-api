@@ -133,7 +133,7 @@ Los actores del sistema son:
 
 ## 5. Uso del Software en el Negocio
 
-> ![Captura de pantalla](images/software.jpeg)
+> ![Captura de pantalla](image/software.jpeg)
 
 ---
 
