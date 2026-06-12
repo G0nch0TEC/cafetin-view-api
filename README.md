@@ -180,4 +180,4 @@ Los actores del sistema son:
 
 ---
 
-*Proyecto complementario a [Cafetín App Android](https://github.com/tu-usuario/App_Cafetin) — 2026*
+*Proyecto complementario a [Cafetín App Android](https://github.com/G0nch0TEC/App_Cafetin) — 2026*
