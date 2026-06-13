@@ -14,6 +14,17 @@ La planificación, seguimiento de tareas y gestión del desarrollo se realizan m
 
 ---
 
+## 🎨 Diseño UI/UX
+
+Los wireframes, prototipos y diseños de interfaz de este proyecto fueron desarrollados en Figma.
+
+[![Figma](https://img.shields.io/badge/Figma-Ver%20Diseño-F24E1E?logo=figma&logoColor=white)](https://www.figma.com/design/PvHpyQ6tqCJsqnnxOAI25p/Proyecto-avance?node-id=0-1&p=f&t=B6WNX0Ybpke57oix-0)
+
+🔗 Diseño en Figma:  
+https://www.figma.com/design/PvHpyQ6tqCJsqnnxOAI25p/Proyecto-avance?node-id=0-1&p=f&t=B6WNX0Ybpke57oix-0
+
+---
+
 ## 1. Descripción del Negocio
 
 **Cafetín escolar** es un negocio de pequeña escala que gestiona fiados entre alumnos y la persona encargada de la tienda. El registro de deudas, pagos y movimientos se realiza desde la app Android **Cafetín**, que opera 100% offline en el dispositivo.
