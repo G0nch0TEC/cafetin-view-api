@@ -4,6 +4,13 @@
 
 ---
 
+## 📋 Gestión del proyecto
+
+El progreso y la organización del proyecto se gestionan en Trello.
+
+[![Trello](https://img.shields.io/badge/Trello-Ver%20Tablero-0052CC?logo=trello&logoColor=white)](https://trello.com)
+
+
 ## 1. Descripción del Negocio
 
 **Cafetín escolar** es un negocio de pequeña escala que gestiona fiados entre alumnos y la persona encargada de la tienda. El registro de deudas, pagos y movimientos se realiza desde la app Android **Cafetín**, que opera 100% offline en el dispositivo.
