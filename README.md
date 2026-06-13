@@ -4,12 +4,15 @@
 
 ---
 
-## 📋 Gestión del proyecto
+## 📋 Gestión del Proyecto
 
-El progreso y la organización del proyecto se gestionan en Trello.
+La planificación, seguimiento de tareas y gestión del desarrollo se realizan mediante Trello.
 
-[![Trello](https://img.shields.io/badge/Trello-Ver%20Tablero-0052CC?logo=trello&logoColor=white)](https://trello.com)
+[![Trello](https://img.shields.io/badge/Trello-Ver%20Tablero-0052CC?logo=trello&logoColor=white)](https://trello.com/b/RlwsrY03/cafetin-gestion-de-fiados)
 
+🔗 Tablero del proyecto: https://trello.com/b/RlwsrY03/cafetin-gestion-de-fiados
+
+---
 
 ## 1. Descripción del Negocio
 
